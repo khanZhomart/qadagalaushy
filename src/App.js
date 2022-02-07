@@ -5,6 +5,7 @@ import Home from './components/home/Home.js'
 import Register from './components/register/Register.js'
 import Sidebar from "./components/nav/Sidebar.js";
 import CreateEmployee from "./components/create.employee/CreateEmployee.js";
+import CreateCase from "./components/create.case/CreateCase.js";
 
 function App() {
   return (   
@@ -14,6 +15,7 @@ function App() {
           <Route exact path="/home" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/employee/create" component={CreateEmployee} />
+          <Route path="/case/create" component={CreateCase} />
         </Switch>
       </Router>
     </>

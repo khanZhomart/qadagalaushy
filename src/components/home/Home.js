@@ -87,10 +87,10 @@ const Home = (props) => {
         <>
         <Container fluid>
           <Row>
-            <Col>
+            <Col md={3} lg={3}>
               <Sidebar />
             </Col>
-            <Col md={9}>
+            <Col md={9} lg={9}>
               <div style={{paddingLeft: "50px"}}>
                 <div className="mt-5">
                   <FadeIn>
@@ -123,82 +123,9 @@ const Home = (props) => {
                 </div>
               </div>
             </Col>
-            {/* <Col>
-              <Container className='mt-5'>
-              
-                <Container style={{width: "500px"}}>
-                  <Row xs="auto" className="bg-primary bg-round p-3">
-                    <Col className="mt-2">
-                      <Icon.PersonBadge size="35" color='white'/>
-                    </Col>
-                    <Col>
-                      <span className="person-name">
-                        {props.profile.lastname + " " + props.profile.firstname + " " + (props.profile.patronymic ? props.profile.patronymic : "")}
-                      </span>
-                      <span className='d-block role-name'>
-                        <Badge bg="light" text="dark">Менеджер</Badge>
-                        <div className="d-inline px-1"></div>
-                        <Badge bg="light" text="dark">Разработчик</Badge>
-                        <div className="d-inline px-1"></div>
-                      </span>
-                    </Col>
-                  </Row>
-                </Container>
-              </Container>
-            </Col> */}
           </Row>
         </Container>
-
-        {/* <FadeIn delay={400}>
-          <div className="d-flex justify-content-center menu-box">
-            <div className="menu ">
-              <p className="title-label">Панель управления</p>
-              <br />
-              <Container>
-                <Row>
-                  <Col>
-                    <Link to="/search">
-                      <Card text="light" className="border-0 rounded-3" style={{width: "18rem", backgroundColor: "#F05454"}}>
-                        <Card.Body>
-                          <Card.Title className="action-title" style={{fontSize: "30px"}}>
-                            Найти дело
-                          </Card.Title>
-                            <Icon.Search className="ico" />
-                        </Card.Body>
-                      </Card>
-                    </Link>
-                  </Col>
-                  <Col>
-                    <Link to="/create">    
-                      <Card text="light" className="border-0 rounded-3" style={{width: "18rem", backgroundColor: "#8A39E1"}}>
-                        <Card.Body>
-                          <Card.Title className="action-title" style={{fontSize: "30px"}}>
-                            Внести новое <br/> дело
-                          </Card.Title>
-                            <Icon.FileEarmarkPlus className="ico" />
-                        </Card.Body>
-                      </Card>
-                    </Link>
-                  </Col>
-                </Row>
-              </Container>
-              <Container className="mt-4">
-                <Row>
-                  <Col>
-                      <Card onClick={handleShow} bg="primary" text="light" className="border-0 rounded-3" style={{width: "18rem", cursor: "pointer"}}>
-                        <Card.Body>
-                          <Card.Title className="action-title" style={{fontSize: "30px"}}>
-                            Добавить сотрудника
-                          </Card.Title>
-                            <Icon.PersonPlusFill className="ico" />
-                        </Card.Body>
-                      </Card>
-                    </Col>
-                </Row>
-              </Container>
-            </div>
-          </div> */}
-          </>
+    </>
       ) : (
         <>
         <div className="d-flex justify-content-center mt-5">

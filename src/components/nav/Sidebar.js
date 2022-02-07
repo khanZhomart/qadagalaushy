@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Nav } from 'react-bootstrap'
+import React, { useState, useEffect } from 'react';
+import { Nav, Spinner } from 'react-bootstrap'
 import { createBrowserHistory } from 'history'
 import { items } from './SidebarData.js'
 import { connect } from 'react-redux';
@@ -9,7 +9,6 @@ import * as Icon from 'react-bootstrap-icons';
 
 const Sidebar = (props) => {
     const history = createBrowserHistory()
-    const [textColor, setTextColor] = useState('')
 
     const handleLogout = () => props.logout()
 
@@ -19,12 +18,6 @@ const Sidebar = (props) => {
                 <div>
                     <p>{props.username}</p>
                 </div>
-                {/* <div>
-                    <img className="prok-icon" src='./prok.png' alt="img" />
-                    <span className="header-text">
-                        Qadagalaushy
-                    </span>
-                </div> */}
                 <div className="mt-5">
                     {items.map((item, index) => 
                         <Nav.Item key={index}>

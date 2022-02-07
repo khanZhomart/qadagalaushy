@@ -3,16 +3,32 @@ import { BASE_URL } from "../config"
 
 class UserApi {
 
-    async update(user) {
+    async update(user, token) {
+        const header = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        }
+
         return await axios.post(
             `${BASE_URL}/api/user/update`,
-            user
+            user,
+            header
         )
     }
 
-    async remove(userId) {
+    async remove(userId, token) {
+        const header = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        }
+
         return await axios.post(
-            `${BASE_URL}/api/user/remove/${userId}`
+            `${BASE_URL}/api/user/remove/${userId}`,
+            header
         )
     }
 }

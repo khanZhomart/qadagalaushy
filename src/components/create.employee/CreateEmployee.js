@@ -68,6 +68,7 @@ const CreateEmployee = (props) => {
             return setError("Заполните все поля.")
 
         setLoading(true)
+        
         authApi.register({
             username: username,
             password: password,
@@ -119,7 +120,6 @@ const CreateEmployee = (props) => {
                                                             <div className='mx-auto d-flex justify-content-center mb-2'>
                                                                 <Icon.CheckCircleFill size="50" color="#5cb85c"/>
                                                             </div>
-                                                
                                                             <p className="bold text-center" style={{color: "#5cb85c"}}>
                                                                 Готово!<br /><span style={{fontSize: "20px"}}>Сотрудник успешно зарегистрирован.</span>
                                                             </p>
