@@ -41,7 +41,7 @@ public class QadagalayshyApplication {
 
 			Role role = roleRepository.findById(3L).orElse(null);
 
-			User user = User.builder()
+			User user1 = User.builder()
 				.username("zhoma")
 				.firstName("Жомартхан")
 				.lastName("Талғатұлы")
@@ -49,7 +49,17 @@ public class QadagalayshyApplication {
 				.roles(roles)
 				.build();
 
-			userService.save(user);
+			User user2 = User.builder()
+				.username("nur89")
+				.firstName("Керімбаев")
+				.lastName("Нұржан")
+				.patronymic("Талғатұлы")
+				.password("12345")
+				.roles(roles)
+				.build();
+
+			userService.save(user1);
+			userService.save(user2);
 		};
 	}
 }

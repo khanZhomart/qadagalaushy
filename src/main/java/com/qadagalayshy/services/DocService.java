@@ -10,9 +10,11 @@ import com.qadagalayshy.utils.DocUtil;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class DocService implements Servable<Doc> {
     private final DocRepository docRepository;
 
@@ -20,6 +22,8 @@ public class DocService implements Servable<Doc> {
     public Doc save(Doc payload) {
         if (this.docRepository.existsById(payload.getDocId()))
             return null;
+
+        log.info(payload.toString());
 
         return this.docRepository.save(payload);
     }

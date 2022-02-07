@@ -9,16 +9,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/api/user")
 @AllArgsConstructor
-@Slf4j
 class UserController {
     private final UserService userService;
 
@@ -40,6 +37,14 @@ class UserController {
     public ResponseEntity<?> findByUsername(@PathVariable String username) {
         return ResponseEntity.ok().body(
             this.userService.findByUsername(username)
+        );
+    }
+
+    // TODO: implement this damn method~ :/
+    @GetMapping("/role/{role}")
+    public ResponseEntity<?> findAllByRole(@PathVariable String roleName) {
+        return ResponseEntity.ok().body(
+            null
         );
     }
 

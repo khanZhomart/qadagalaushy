@@ -35,6 +35,7 @@ class DocController {
 
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody Doc doc) {
+        
         return ResponseEntity.ok().body(
             this.docService.save(doc)
         );
