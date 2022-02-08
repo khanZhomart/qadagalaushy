@@ -46,6 +46,8 @@ public class QadagalayshyApplication {
 				.firstName("Жомартхан")
 				.lastName("Талғатұлы")
 				.password("12345")
+				.prosecutor("Крутой прокурор")
+				.position("Прокурор Есильского района")
 				.roles(roles)
 				.build();
 
@@ -54,6 +56,8 @@ public class QadagalayshyApplication {
 				.firstName("Керімбаев")
 				.lastName("Нұржан")
 				.patronymic("Талғатұлы")
+				.prosecutor("Прокурор всех прокуроров")
+				.position("Прокурор мира")
 				.password("12345")
 				.roles(roles)
 				.build();
