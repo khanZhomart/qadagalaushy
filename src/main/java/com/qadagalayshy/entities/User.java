@@ -37,6 +37,9 @@ public class User {
     private String lastName;
     private String patronymic;
 
+    private String prosecutor;
+    private String position;
+
     private String password;
 
     @ManyToMany(cascade = CascadeType.MERGE)
