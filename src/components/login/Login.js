@@ -44,6 +44,8 @@ const Login = (props) => {
                     firstname: user.firstName,
                     lastname: user.lastName,
                     patronymic: user.patronymic,
+                    prosecutor: user.prosecutor,
+                    position: user.position,
                     role: user.roles[0].name
                   },
                   token: {

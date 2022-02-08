@@ -7,6 +7,8 @@ const initialState = {
         firstname: '',
         lastname: '',
         patronymic: '',
+        prosecutor: '',
+        position: '',
         role: ''
     },
     token: {

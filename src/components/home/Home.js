@@ -95,19 +95,22 @@ const Home = (props) => {
                 <div className="mt-5">
                   <FadeIn>
                     <p className="title">Карточка пользователя</p>
-                    <div className="bg-round bg-primary user-card d-flex flew-row" style={{width: (props.profile.patronymic ? "475px" : "375px")}}>
+                    <div className="bg-round bg-primary user-card d-flex flew-row" style={{width: (props.profile.patronymic ? `450px` : "375px")}}>
                       <div className="mt-2">
                         <Icon.PersonBadge size="40" color="white"/>
                       </div>
                       <div className="" style={{marginLeft: "10px"}}>
                         <div className="d-flex flex-column">
-                          <span className="person-name">
+                          <span className="person-name" style={{lineHeight: '1.2'}}>
                             {props.profile.lastname + " " + props.profile.firstname + " " + (props.profile.patronymic ? props.profile.patronymic : "")}
                           </span>
-                          <div>
+                          <div className='mt-2'>
                             <span className='role-name'>
                               <Badge bg="light" text="dark">{props.profile.role}</Badge>
-                              <div className="d-inline px-1"></div>
+                              <div className="d-inline ps-1"></div>
+                              <Badge bg="light" text="dark">{props.profile.prosecutor}</Badge>
+                              <div className="px-1"></div>
+                              <Badge bg="light" text="dark">{props.profile.position}</Badge>
                             </span>
                           </div>
                         </div>

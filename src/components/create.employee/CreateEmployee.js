@@ -132,7 +132,7 @@ const CreateEmployee = (props) => {
                                                     </FadeIn>
                                                 </div>
                                             :
-                                                <div className="w-50" style={{height: "800px"}}>
+                                                <div className="w-50 mt-5" style={{height: "800px"}}>
                                                     <Form>
                                                         <Form.Text style={{display: 'block', color: 'red'}}>
                                                             {error}   
