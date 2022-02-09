@@ -146,121 +146,123 @@ const CreateCase = (props) => {
                             </Col>
                             <Col md={9} lg={9}>
                                 <div style={{paddingLeft: "50px"}}>
-                                    <div className="mt-5">
-                                        <p className="title">Внести новое дело</p>
-                                        {success ? 
-                                            <div className='mt-5'>
-                                                <FadeIn>
-                                                    <div className="mt-5 w-50">
-                                                        <div className='mx-auto d-flex justify-content-center mb-2'>
-                                                            <Icon.CheckCircleFill size="50" color="#5cb85c"/>
-                                                        </div>
-                                                        <p className="bold text-center" style={{color: "#5cb85c"}}>
-                                                            Готово!<br /><span style={{fontSize: "20px"}}>Дело успешно добавлено.</span>
-                                                        </p>
-                                                        <div className='mx-auto d-flex justify-content-center mb-2'>
-                                                            <Button className="w-50" onClick={() => setSuccess(null)} variant="primary">
-                                                                <b>Добавить ещё</b>
-                                                            </Button>
-                                                        </div>
-                                                    </div>
-                                                </FadeIn>
-                                            </div>
-                                        : 
-                                        <div className="w-50 mt-5" style={{height: "800px"}}>
-                                            <Form>
-                                                <Form.Text style={{display: 'block', color: 'red'}}>
-                                                    {error}   
-                                                </Form.Text>
-
-                                                <Form.Group className="mb-3">
-                                                    <Form.Label>Номер уголовного дела</Form.Label>
-                                                    <Form.Control onChange={onCaseIdChange} autocomplete="new-password" placeholder="" />
-                                                </Form.Group>
-
-                                                <Form.Group className="mb-3">
-                                                    <Form.Label>Короткое имя ответственного сотрудника</Form.Label>
-                                                    {responsibleEmployeeId !== 0 ? (
-                                                                <Icon.CheckCircleFill size="20" color="#5cb85c" className="d-inline" style={{marginLeft: "10px"}}/>
-                                                            ) : (
-                                                                <>
-                                                                </>
-                                                            )}
-                                                    {searchLoading ?
-                                                        <>
-                                                            <Form.Control onChange={onResponsibleEmployeeNameChange} autocomplete="new-password" placeholder="" disabled/>
-                                                            <div className="" style={{width: "100px", marginTop: "10px"}}>
-                                                                <Button variant="primary" className="">
-                                                                <Spinner
-                                                                    as="span"
-                                                                    animation="border"
-                                                                    size="sm"
-                                                                    role="status"
-                                                                    aria-hidden="true"
-                                                                />
+                                    <FadeIn>
+                                        <div className="mt-5">
+                                            <p className="title">Внести новое дело</p>
+                                            {success ? 
+                                                <div className='mt-5'>
+                                                    <FadeIn>
+                                                        <div className="mt-5 w-50">
+                                                            <div className='mx-auto d-flex justify-content-center mb-2'>
+                                                                <Icon.CheckCircleFill size="50" color="#5cb85c"/>
+                                                            </div>
+                                                            <p className="bold text-center" style={{color: "#5cb85c"}}>
+                                                                Готово!<br /><span style={{fontSize: "20px"}}>Дело успешно добавлено.</span>
+                                                            </p>
+                                                            <div className='mx-auto d-flex justify-content-center mb-2'>
+                                                                <Button className="w-50" onClick={() => setSuccess(null)} variant="primary">
+                                                                    <b>Добавить ещё</b>
                                                                 </Button>
                                                             </div>
-                                                        </>
-                                                    :
-                                                        <>
-                                                            <Form.Text style={{display: 'block', color: 'red'}}>
-                                                                {searchError}   
-                                                            </Form.Text>
-                                                            <Form.Control onChange={onResponsibleEmployeeNameChange} autocomplete="new-password" placeholder={employee.firstName + " " + employee.lastName + (employee.patronymic ? " " + employee.patronymic : "")} />
-                                                            <div className="" style={{width: "100px", marginTop: "10px"}}>
-                                                                <Button onClick={onSearchClick} variant="primary" className="">Найти</Button>
-                                                            </div>
-                                                            <Form.Text className="text-muted">
-                                                                Не перепутайте с именем: короткое имя сотрудника начинается с @. Он нужен для быстрого поиска по базе.
-                                                            </Form.Text>
-                                                        </>
+                                                        </div>
+                                                    </FadeIn>
+                                                </div>
+                                            : 
+                                            <div className="w-50 mt-5" style={{height: "800px"}}>
+                                                <Form>
+                                                    <Form.Text style={{display: 'block', color: 'red'}}>
+                                                        {error}   
+                                                    </Form.Text>
+
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Номер уголовного дела</Form.Label>
+                                                        <Form.Control onChange={onCaseIdChange} autocomplete="new-password" placeholder="" />
+                                                    </Form.Group>
+
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Короткое имя ответственного сотрудника</Form.Label>
+                                                        {responsibleEmployeeId !== 0 ? (
+                                                                    <Icon.CheckCircleFill size="20" color="#5cb85c" className="d-inline" style={{marginLeft: "10px"}}/>
+                                                                ) : (
+                                                                    <>
+                                                                    </>
+                                                                )}
+                                                        {searchLoading ?
+                                                            <>
+                                                                <Form.Control onChange={onResponsibleEmployeeNameChange} autocomplete="new-password" placeholder="" disabled/>
+                                                                <div className="" style={{width: "100px", marginTop: "10px"}}>
+                                                                    <Button variant="primary" className="">
+                                                                        <Spinner
+                                                                            as="span"
+                                                                            animation="border"
+                                                                            size="sm"
+                                                                            role="status"
+                                                                            aria-hidden="true"
+                                                                        />
+                                                                    </Button>
+                                                                </div>
+                                                            </>
+                                                        :
+                                                            <>
+                                                                <Form.Text style={{display: 'block', color: 'red'}}>
+                                                                    {searchError}   
+                                                                </Form.Text>
+                                                                <Form.Control onChange={onResponsibleEmployeeNameChange} autocomplete="new-password" placeholder={employee.firstName + " " + employee.lastName + (employee.patronymic ? " " + employee.patronymic : "")} />
+                                                                <div className="" style={{width: "100px", marginTop: "10px"}}>
+                                                                    <Button onClick={onSearchClick} variant="primary" className="">Найти</Button>
+                                                                </div>
+                                                                <Form.Text className="text-muted">
+                                                                    Не перепутайте с именем: короткое имя сотрудника начинается с @. Он нужен для быстрого поиска по базе.
+                                                                </Form.Text>
+                                                            </>
+                                                        }
+                                                    </Form.Group>
+
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Орган</Form.Label>
+                                                        <Form.Control onChange={onAgencyChange} autocomplete="new-password" placeholder="" />
+                                                    </Form.Group>
+
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Подразделение</Form.Label>
+                                                        <Form.Control onChange={onDivisionChange} autocomplete="new-password" placeholder="" />
+                                                    </Form.Group>
+
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Дата назначения</Form.Label>
+                                                        <Form.Control type="date" onChange={onAssignmentDateChange} autocomplete="new-password" placeholder="" />
+                                                    </Form.Group>
+
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Проделанная работа</Form.Label>
+                                                        <Form.Control onChange={onReportChange} autocomplete="new-password" placeholder="" />
+                                                    </Form.Group>
+
+                                                    <Form.Group className="mb-3">
+                                                        <Form.Label>Законность ЕРДР</Form.Label>
+                                                        <Form.Control onChange={onLegalChange} autocomplete="new-password" placeholder="" />
+                                                    </Form.Group>
+
+                                                    {loading ?
+                                                        <Button className="mt-2" variant="primary" disabled>
+                                                            <Spinner
+                                                                as="span"
+                                                                animation="border"
+                                                                size="sm"
+                                                                role="status"
+                                                                aria-hidden="true"
+                                                            />
+                                                        </Button>
+                                                        :
+                                                        <Button variant="primary" onClick={onSubmit}>
+                                                            Сохранить
+                                                        </Button>
                                                     }
-                                                </Form.Group>
-
-                                                <Form.Group className="mb-3">
-                                                    <Form.Label>Орган</Form.Label>
-                                                    <Form.Control onChange={onAgencyChange} autocomplete="new-password" placeholder="" />
-                                                </Form.Group>
-
-                                                <Form.Group className="mb-3">
-                                                    <Form.Label>Подразделение</Form.Label>
-                                                    <Form.Control onChange={onDivisionChange} autocomplete="new-password" placeholder="" />
-                                                </Form.Group>
-
-                                                <Form.Group className="mb-3">
-                                                    <Form.Label>Дата назначения</Form.Label>
-                                                    <Form.Control type="date" onChange={onAssignmentDateChange} autocomplete="new-password" placeholder="" />
-                                                </Form.Group>
-
-                                                <Form.Group className="mb-3">
-                                                    <Form.Label>Проделанная работа</Form.Label>
-                                                    <Form.Control onChange={onReportChange} autocomplete="new-password" placeholder="" />
-                                                </Form.Group>
-
-                                                <Form.Group className="mb-3">
-                                                    <Form.Label>Законность ЕРДР</Form.Label>
-                                                    <Form.Control onChange={onLegalChange} autocomplete="new-password" placeholder="" />
-                                                </Form.Group>
-
-                                                {loading ?
-                                                    <Button className="mt-2" variant="primary" disabled>
-                                                        <Spinner
-                                                            as="span"
-                                                            animation="border"
-                                                            size="sm"
-                                                            role="status"
-                                                            aria-hidden="true"
-                                                        />
-                                                    </Button>
-                                                    :
-                                                    <Button variant="primary" onClick={onSubmit}>
-                                                        Сохранить
-                                                    </Button>
-                                                }
-                                            </Form>
+                                                </Form>
+                                            </div>
+                                            }
                                         </div>
-                                        }
-                                    </div>
+                                    </FadeIn>
                                 </div>
                             </Col>
                         </Row>
