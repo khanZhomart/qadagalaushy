@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import FadeIn from 'react-fade-in/lib/FadeIn';
 import { connect } from 'react-redux';
 
-import { Button, Col, Card, Container, Row, Spinner, InputGroup, FormControl, Form } from 'react-bootstrap'
+import { Tab, Nav, Button, Col, Card, Container, Row, Spinner, InputGroup, FormControl, Form } from 'react-bootstrap'
 import * as Icon from 'react-bootstrap-icons'
 import Sidebar from '../nav/Sidebar';
 import docApi from '../../api/doc.api';
@@ -65,101 +65,148 @@ const SearchCase = (props) => {
                                     <FadeIn>
                                         <div className='mt-5'>
                                             <p className='title'>Найти дело</p>
-                                                <div className="w-50 mt-5" style={{height: "800px"}}>
-                                                    <Form.Group className="mb-3">
-                                                        <Form.Label>Номер уголовного дела</Form.Label>
-                                                        <FormControl
-                                                            type="number"
-                                                            onChange={onDocIdChange}
-                                                            disabled={loading}
-                                                        />
-                                                    </Form.Group>
-                                                    {loading ? (
-                                                        <Button onClick={onSubmit} className='w-25' disabled>
-                                                            <Spinner
-                                                                as="span"
-                                                                animation="border"
-                                                                size="sm"
-                                                                role="status"
-                                                                aria-hidden="true"
-                                                            />
-                                                        </Button>
-                                                    ) : (
-                                                        <Button onClick={onSubmit} className='w-25'>
-                                                            <span><b>Найти</b></span>
-                                                        </Button>
-                                                    )}
+                                                <div className="w-75 mt-5" style={{height: "800px"}}>
+                                                    <Tab.Container id="" defaultActiveKey="first">
+                                                        <Nav variant="pills" className="flex-row">
+                                                            <Nav.Item>
+                                                            <Nav.Link eventKey="first">По номеру дела</Nav.Link>
+                                                            </Nav.Item>
+                                                            <Nav.Item>
+                                                            <Nav.Link eventKey="second">По ответственному лицу</Nav.Link>
+                                                            </Nav.Item>
+                                                            <Nav.Item>
+                                                            <Nav.Link eventKey="third">По дате назначения</Nav.Link>
+                                                            </Nav.Item>
+                                                        </Nav>
+                                                        <Tab.Content>
+                                                            <Tab.Pane eventKey="first" className='mt-5'>
+                                                                <Form.Group className="mb-3">
+                                                                    <Form.Label>Номер уголовного дела</Form.Label>
+                                                                    <FormControl
+                                                                        type="number"
+                                                                        onChange={onDocIdChange}
+                                                                        disabled={loading}
+                                                                    />
+                                                                {loading ? (
+                                                                    <Button onClick={onSubmit} className='w-25' disabled>
+                                                                        <Spinner
+                                                                            as="span"
+                                                                            animation="border"
+                                                                            size="sm"
+                                                                            role="status"
+                                                                            aria-hidden="true"
+                                                                        />
+                                                                    </Button>
+                                                                ) : (
+                                                                    <Button onClick={onSubmit} className='mt-2' style={{width: '100px'}}>
+                                                                        <span><b>Найти</b></span>
+                                                                    </Button>
+                                                                )}
 
-                                                    {success ? (
-                                                        <div className='mt-5'>
-                                                            {console.log(doc)}
-                                                            <Card>
-                                                                <Card.Body>
-                                                                    <Card.Title>
-                                                                        Дело №{doc.docId}
-                                                                    </Card.Title>
-                                                                    <div className='mt-4'>
-                                                                        <span className="group">
-                                                                            <p className='value'>
-                                                                                <span className="title-doc">
-                                                                                    Ответственное лицо
-                                                                                </span>
-                                                                                <br />{doc.responsibleEmployee.firstName + " " + doc.responsibleEmployee.lastName + " " + (doc.responsibleEmployee.patronymic ? doc.responsibleEmployee.patronymic : "")}
-                                                                            </p>
-                                                                        </span>
+                                                                {success ? (
+                                                                    <div className='mt-5 w-50'>
+                                                                        {console.log(doc)}
+                                                                        <Card>
+                                                                            <Card.Body>
+                                                                                <Card.Title>
+                                                                                    Дело №{doc.docId}
+                                                                                </Card.Title>
+                                                                                <div className='mt-4'>
+                                                                                    <span className="group">
+                                                                                        <p className='value'>
+                                                                                            <span className="title-doc">
+                                                                                                Ответственное лицо
+                                                                                            </span>
+                                                                                            <br />{doc.responsibleEmployee.firstName + " " + doc.responsibleEmployee.lastName + " " + (doc.responsibleEmployee.patronymic ? doc.responsibleEmployee.patronymic : "")}
+                                                                                        </p>
+                                                                                    </span>
 
-                                                                        <span className="group">
-                                                                            <p className='value'>
-                                                                                <span className="title-doc">
-                                                                                    Орган
-                                                                                </span>
-                                                                                <br />{doc.agency}
-                                                                            </p>
-                                                                        </span>
+                                                                                    <span className="group">
+                                                                                        <p className='value'>
+                                                                                            <span className="title-doc">
+                                                                                                Орган
+                                                                                            </span>
+                                                                                            <br />{doc.agency}
+                                                                                        </p>
+                                                                                    </span>
 
-                                                                        <span className="group">
-                                                                            <p className='value'>
-                                                                                <span className="title-doc">
-                                                                                    Подразделение
-                                                                                </span>
-                                                                                <br />{doc.division}
-                                                                            </p>
-                                                                        </span>
+                                                                                    <span className="group">
+                                                                                        <p className='value'>
+                                                                                            <span className="title-doc">
+                                                                                                Подразделение
+                                                                                            </span>
+                                                                                            <br />{doc.division}
+                                                                                        </p>
+                                                                                    </span>
 
-                                                                        <span className="group">
-                                                                            <p className='value'>
-                                                                                <span className="title-doc">
-                                                                                    Дата назначения
-                                                                                </span>
-                                                                                <br />{doc.assignmentDate}
-                                                                            </p>
-                                                                        </span>
+                                                                                    <span className="group">
+                                                                                        <p className='value'>
+                                                                                            <span className="title-doc">
+                                                                                                Дата назначения
+                                                                                            </span>
+                                                                                            <br />{doc.assignmentDate}
+                                                                                        </p>
+                                                                                    </span>
 
-                                                                        <span className="group">
-                                                                            <p className='value'>
-                                                                                <span className="title-doc">
-                                                                                    Проделанная работа
-                                                                                </span>
-                                                                                <br />{doc.report}
-                                                                            </p>
-                                                                        </span>
+                                                                                    <span className="group">
+                                                                                        <p className='value'>
+                                                                                            <span className="title-doc">
+                                                                                                Проделанная работа
+                                                                                            </span>
+                                                                                            <br />{doc.report}
+                                                                                        </p>
+                                                                                    </span>
 
-                                                                        <span className="group">
-                                                                            <p className='value'>
-                                                                                <span className="title-doc">
-                                                                                    Законность ЕРДР
-                                                                                </span>
-                                                                                <br />{doc.legal}
-                                                                            </p>
-                                                                        </span>
-                                                                    </div>
-                                                                </Card.Body>
-                                                            </Card>
-                                                        </div>  
-                                                    ): (
-                                                        <>
-                                                        </>
-                                                    )}
+                                                                                    <span className="group">
+                                                                                        <p className='value'>
+                                                                                            <span className="title-doc">
+                                                                                                Законность ЕРДР
+                                                                                            </span>
+                                                                                            <br />{doc.legal}
+                                                                                        </p>
+                                                                                    </span>
+                                                                                </div>
+                                                                            </Card.Body>
+                                                                        </Card>
+                                                                    </div>  
+                                                                ): (
+                                                                    <>
+                                                                    </>
+                                                                )}
+                                                                </Form.Group>
+                                                            </Tab.Pane>
+
+                                                            <Tab.Pane eventKey="second" className='mt-5'>
+                                                                <Form.Group className="mb-3">
+                                                                    <Form.Label>Короткое имя сотрудника</Form.Label>
+                                                                    <FormControl
+                                                                        type="text"
+                                                                        onChange={onDocIdChange}
+                                                                        disabled={loading}
+                                                                    />
+                                                                    {loading ? (
+                                                                        <Button onClick={onSubmit} className='w-25' disabled>
+                                                                            <Spinner
+                                                                                as="span"
+                                                                                animation="border"
+                                                                                size="sm"
+                                                                                role="status"
+                                                                                aria-hidden="true"
+                                                                            />
+                                                                        </Button>
+                                                                    ) : (
+                                                                        <Button onClick={onSubmit} className='mt-2' style={{width: '100px'}}>
+                                                                            <span><b>Найти</b></span>
+                                                                        </Button>
+                                                                    )}
+                                                                </Form.Group>
+                                                            </Tab.Pane>
+
+                                                            <Tab.Pane eventKey="third" className='mt-5'>
+
+                                                            </Tab.Pane>
+                                                        </Tab.Content>
+                                                    </Tab.Container>
                                                 </div>
                                         </div>
                                     </FadeIn>
