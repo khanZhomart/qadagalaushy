@@ -31,6 +31,20 @@ class DocApi {
             header
         )
     }
+
+    async getAllByUsername(username, token) {
+        const header = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        }
+
+        return await axios.get(
+            `${BASE_URL}/api/doc/user/${username}`,
+            header
+        )
+    }
 }
 
 export default new DocApi()

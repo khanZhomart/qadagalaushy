@@ -2,18 +2,21 @@ import React, { useState, useEffect } from 'react';
 import FadeIn from 'react-fade-in/lib/FadeIn';
 import { connect } from 'react-redux';
 
-import { Tab, Nav, Button, Col, Card, Container, Row, Spinner, InputGroup, FormControl, Form } from 'react-bootstrap'
+import { Accordion, Tab, Nav, Button, Col, Card, Container, Row, Spinner, InputGroup, FormControl, Form } from 'react-bootstrap'
 import * as Icon from 'react-bootstrap-icons'
 import Sidebar from '../nav/Sidebar';
 import docApi from '../../api/doc.api';
 
 import './search.case.css'
+import SearchByDocId from './search.docid/SearchByDocId';
+import SearchDocByUsername from './search.username/SearchDocByUsername';
 
 const SearchCase = (props) => {
     const [success, setSuccess] = useState(false)
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const [docId, setDocId] = useState(-1)
+    const [username, setUsername] = useState('')
     const [doc, setDoc] = useState({})
 
     const onDocIdChange = (e) => {
@@ -21,11 +24,43 @@ const SearchCase = (props) => {
         setDocId(Number(e.target.value))
     }
 
-    const onSubmit = () => {
+    const onDocUsernameChange = (e) => {
+        setError('')
+        setUsername(e.target.value)
+    }
+
+    const onSubmitSearchByDocId = () => {
         setLoading(true)
 
         docApi.getById(docId, props.token)
             .then((res) => {
+                if (res.data === '') {
+                    setTimeout(() => {
+                        setError('Документ отсутствует в базе')
+                        setLoading(false)
+                    }, 1000)
+                } else {
+                    setTimeout(() => {
+                        setError('')
+                        setDoc(res.data)
+                        setSuccess(true)
+                        setLoading(false)
+                    }, 1000)
+                }
+            })
+            .catch((e) => {
+                setError('Произошла непредвиденная ошибка')
+                setLoading(false)
+                console.log(e)
+            })
+    }
+
+    const onSubmitSearchByUsername = () => {
+        setLoading(true)
+
+        docApi.getAllByUsername(username, props.token)
+            .then((res) => {
+                console.log(res.data)
                 if (res.data === '') {
                     setTimeout(() => {
                         setError('Документ отсутствует в базе')
@@ -69,137 +104,22 @@ const SearchCase = (props) => {
                                                     <Tab.Container id="" defaultActiveKey="first">
                                                         <Nav variant="pills" className="flex-row">
                                                             <Nav.Item>
-                                                            <Nav.Link eventKey="first">По номеру дела</Nav.Link>
+                                                                <Nav.Link eventKey="first">По номеру дела</Nav.Link>
                                                             </Nav.Item>
                                                             <Nav.Item>
-                                                            <Nav.Link eventKey="second">По ответственному лицу</Nav.Link>
+                                                                <Nav.Link eventKey="second">По ответственному лицу</Nav.Link>
                                                             </Nav.Item>
                                                             <Nav.Item>
-                                                            <Nav.Link eventKey="third">По дате назначения</Nav.Link>
+                                                                <Nav.Link eventKey="third">По дате назначения</Nav.Link>
                                                             </Nav.Item>
                                                         </Nav>
                                                         <Tab.Content>
                                                             <Tab.Pane eventKey="first" className='mt-5'>
-                                                                <Form.Group className="mb-3">
-                                                                    <Form.Label>Номер уголовного дела</Form.Label>
-                                                                    <FormControl
-                                                                        type="number"
-                                                                        onChange={onDocIdChange}
-                                                                        disabled={loading}
-                                                                    />
-                                                                {loading ? (
-                                                                    <Button onClick={onSubmit} className='w-25' disabled>
-                                                                        <Spinner
-                                                                            as="span"
-                                                                            animation="border"
-                                                                            size="sm"
-                                                                            role="status"
-                                                                            aria-hidden="true"
-                                                                        />
-                                                                    </Button>
-                                                                ) : (
-                                                                    <Button onClick={onSubmit} className='mt-2' style={{width: '100px'}}>
-                                                                        <span><b>Найти</b></span>
-                                                                    </Button>
-                                                                )}
-
-                                                                {success ? (
-                                                                    <div className='mt-5 w-50'>
-                                                                        {console.log(doc)}
-                                                                        <Card>
-                                                                            <Card.Body>
-                                                                                <Card.Title>
-                                                                                    Дело №{doc.docId}
-                                                                                </Card.Title>
-                                                                                <div className='mt-4'>
-                                                                                    <span className="group">
-                                                                                        <p className='value'>
-                                                                                            <span className="title-doc">
-                                                                                                Ответственное лицо
-                                                                                            </span>
-                                                                                            <br />{doc.responsibleEmployee.firstName + " " + doc.responsibleEmployee.lastName + " " + (doc.responsibleEmployee.patronymic ? doc.responsibleEmployee.patronymic : "")}
-                                                                                        </p>
-                                                                                    </span>
-
-                                                                                    <span className="group">
-                                                                                        <p className='value'>
-                                                                                            <span className="title-doc">
-                                                                                                Орган
-                                                                                            </span>
-                                                                                            <br />{doc.agency}
-                                                                                        </p>
-                                                                                    </span>
-
-                                                                                    <span className="group">
-                                                                                        <p className='value'>
-                                                                                            <span className="title-doc">
-                                                                                                Подразделение
-                                                                                            </span>
-                                                                                            <br />{doc.division}
-                                                                                        </p>
-                                                                                    </span>
-
-                                                                                    <span className="group">
-                                                                                        <p className='value'>
-                                                                                            <span className="title-doc">
-                                                                                                Дата назначения
-                                                                                            </span>
-                                                                                            <br />{doc.assignmentDate}
-                                                                                        </p>
-                                                                                    </span>
-
-                                                                                    <span className="group">
-                                                                                        <p className='value'>
-                                                                                            <span className="title-doc">
-                                                                                                Проделанная работа
-                                                                                            </span>
-                                                                                            <br />{doc.report}
-                                                                                        </p>
-                                                                                    </span>
-
-                                                                                    <span className="group">
-                                                                                        <p className='value'>
-                                                                                            <span className="title-doc">
-                                                                                                Законность ЕРДР
-                                                                                            </span>
-                                                                                            <br />{doc.legal}
-                                                                                        </p>
-                                                                                    </span>
-                                                                                </div>
-                                                                            </Card.Body>
-                                                                        </Card>
-                                                                    </div>  
-                                                                ): (
-                                                                    <>
-                                                                    </>
-                                                                )}
-                                                                </Form.Group>
+                                                                <SearchByDocId />
                                                             </Tab.Pane>
 
                                                             <Tab.Pane eventKey="second" className='mt-5'>
-                                                                <Form.Group className="mb-3">
-                                                                    <Form.Label>Короткое имя сотрудника</Form.Label>
-                                                                    <FormControl
-                                                                        type="text"
-                                                                        onChange={onDocIdChange}
-                                                                        disabled={loading}
-                                                                    />
-                                                                    {loading ? (
-                                                                        <Button onClick={onSubmit} className='w-25' disabled>
-                                                                            <Spinner
-                                                                                as="span"
-                                                                                animation="border"
-                                                                                size="sm"
-                                                                                role="status"
-                                                                                aria-hidden="true"
-                                                                            />
-                                                                        </Button>
-                                                                    ) : (
-                                                                        <Button onClick={onSubmit} className='mt-2' style={{width: '100px'}}>
-                                                                            <span><b>Найти</b></span>
-                                                                        </Button>
-                                                                    )}
-                                                                </Form.Group>
+                                                                <SearchDocByUsername />
                                                             </Tab.Pane>
 
                                                             <Tab.Pane eventKey="third" className='mt-5'>
