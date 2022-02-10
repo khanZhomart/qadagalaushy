@@ -1,7 +1,6 @@
 package com.qadagalayshy.controllers;
 
 import com.qadagalayshy.entities.Doc;
-import com.qadagalayshy.entities.User;
 import com.qadagalayshy.services.DocService;
 
 import org.springframework.http.ResponseEntity;
@@ -27,10 +26,10 @@ class DocController {
         );
     }
 
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<?> findAllByUser(@RequestBody Long userId) {
+    @GetMapping("/user/{username}")
+    public ResponseEntity<?> findAllByUser(@RequestBody String username) {
         return ResponseEntity.ok().body(
-            this.docService.findAllByUser(userId)
+            this.docService.findAllByUsername(username)
         );
     }
     

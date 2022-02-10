@@ -37,8 +37,8 @@ public class DocService implements Servable<Doc> {
         );
     }
 
-    public List<Doc> findAllByUser(Long userId) {
-        User user = this.userService.findById(userId);
+    public List<Doc> findAllByUsername(String username) {
+        User user = this.userService.findByUsername(username);
 
         if (user == null)
             return null;
