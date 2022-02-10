@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 import com.qadagalayshy.entities.Doc;
+import com.qadagalayshy.entities.User;
 import com.qadagalayshy.repositories.DocRepository;
 import com.qadagalayshy.utils.DocUtil;
 
@@ -17,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DocService implements Servable<Doc> {
     private final DocRepository docRepository;
+    private final UserService userService;
 
     @Override
     public Doc save(Doc payload) {
@@ -32,6 +34,17 @@ public class DocService implements Servable<Doc> {
     public List<Doc> findAll() {
         return Lists.newArrayList(
             this.docRepository.findAll()
+        );
+    }
+
+    public List<Doc> findAllByUser(Long userId) {
+        User user = this.userService.findById(userId);
+
+        if (user == null)
+            return null;
+
+        return Lists.newArrayList(
+            this.docRepository.findAllByResponsibleEmployee(user)
         );
     }
 
