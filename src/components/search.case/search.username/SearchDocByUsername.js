@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Button, Spinner, Accordion, FormControl } from 'react-bootstrap'
+import FadeIn from 'react-fade-in/lib/FadeIn'
 import { connect } from 'react-redux'
 import docApi from '../../../api/doc.api'
 
@@ -8,7 +9,7 @@ const SearchDocByUsername = (props) => {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const [username, setUsername] = useState('')
-    const [doc, setDoc] = useState({})
+    const [doc, setDoc] = useState([])
 
     const onDocUsernameChange = (e) => {
         setError('')
@@ -27,6 +28,7 @@ const SearchDocByUsername = (props) => {
                         setLoading(false)
                     }, 1000)
                 } else {
+                    console.log('bruh')
                     setTimeout(() => {
                         setError('')
                         setDoc(res.data)
@@ -56,7 +58,7 @@ const SearchDocByUsername = (props) => {
                     disabled={loading}
                 />
                 {loading ? (
-                    <Button onClick={onSubmitSearchByUsername} className='w-25' disabled>
+                    <Button onClick={onSubmitSearchByUsername} className='mt-2' style={{width: '100px'}} disabled>
                         <Spinner
                             as="span"
                             animation="border"
@@ -72,23 +74,23 @@ const SearchDocByUsername = (props) => {
                 )}
             </Form.Group>
 
-                {success ? (
+            {success ? (
+                <FadeIn>
                     <div className='mt-5 w-50'>
                         <Accordion>
-                            <Accordion.Item eventKey="0">
-                                <Accordion.Header>Accordion Item #1</Accordion.Header>
-                                <Accordion.Body>
-                                
-                                </Accordion.Body>
-                            </Accordion.Item>
-                            <Accordion.Item eventKey="1">
-                                <Accordion.Header>Accordion Item #2</Accordion.Header>
-                                <Accordion.Body>
-                                
-                                </Accordion.Body>
-                            </Accordion.Item>
+                            {doc.map((item, key) => {
+                                return <Accordion.Item eventKey={key}>
+                                    <Accordion.Header>
+                                        Дело №{item.docId}
+                                    </Accordion.Header>
+                                    <Accordion.Body>
+                                        {item.agency} {item.division} {item.assignmentDate}
+                                    </Accordion.Body>
+                                </Accordion.Item>
+                            })}
                         </Accordion>
                     </div>
+                </FadeIn>
                 ) : (
                     <>
                     </>

@@ -55,7 +55,7 @@ const SearchByDocId = (props) => {
                 disabled={loading}
             />
             {loading ? (
-                <Button onClick={onSubmitSearchByDocId} className='w-25' disabled>
+                <Button onClick={onSubmitSearchByDocId} className='mt-2' style={{width: '100px'}} disabled>
                     <Spinner
                         as="span"
                         animation="border"
