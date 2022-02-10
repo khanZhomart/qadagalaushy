@@ -27,7 +27,7 @@ class DocController {
     }
 
     @GetMapping("/user/{username}")
-    public ResponseEntity<?> findAllByUser(@RequestBody String username) {
+    public ResponseEntity<?> findAllByUser(@PathVariable String username) {
         return ResponseEntity.ok().body(
             this.docService.findAllByUsername(username)
         );
@@ -42,7 +42,6 @@ class DocController {
 
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody Doc doc) {
-        
         return ResponseEntity.ok().body(
             this.docService.save(doc)
         );
