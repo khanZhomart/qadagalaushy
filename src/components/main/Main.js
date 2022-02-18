@@ -23,7 +23,6 @@ const Main = (props) => {
                 <FadeIn>
                     <div className="d-flex justify-content-center mt-5">
                         <div className="box border round p-3">
-                            <p className="subtitle mx-auto mt-3">Выберите действие</p>
                             <div className="px-4 btns">
                                 <div className="w-100">
                                 <Link to="/login">

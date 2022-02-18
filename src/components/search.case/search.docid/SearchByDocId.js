@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Button, Card, FormControl, Spinner } from 'react-bootstrap'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import docApi from '../../../api/doc.api'
 
 const SearchByDocId = (props) => {

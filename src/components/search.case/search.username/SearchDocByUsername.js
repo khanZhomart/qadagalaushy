@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Form, Button, Spinner, Accordion, FormControl } from 'react-bootstrap'
 import FadeIn from 'react-fade-in/lib/FadeIn'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import docApi from '../../../api/doc.api'
 
 const SearchDocByUsername = (props) => {

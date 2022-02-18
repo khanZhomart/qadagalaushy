@@ -3,6 +3,7 @@ import { Container, Row, Col, Button, Form, Spinner, InputGroup } from 'react-bo
 import * as Icon from 'react-bootstrap-icons'
 import FadeIn from 'react-fade-in'
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import authApi from '../../api/auth.api';
 import docApi from '../../api/doc.api';
 import Sidebar from '../nav/Sidebar';
@@ -262,7 +263,7 @@ const CreateCase = (props) => {
                 </>
             ) : (
                 <>
-
+                    <Redirect push to="/login" />
                 </>
             )}
         </>

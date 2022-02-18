@@ -10,81 +10,9 @@ import docApi from '../../api/doc.api';
 import './search.case.css'
 import SearchByDocId from './search.docid/SearchByDocId';
 import SearchDocByUsername from './search.username/SearchDocByUsername';
+import { Redirect } from 'react-router-dom';
 
 const SearchCase = (props) => {
-    const [success, setSuccess] = useState(false)
-    const [error, setError] = useState('')
-    const [loading, setLoading] = useState(false)
-    const [docId, setDocId] = useState(-1)
-    const [username, setUsername] = useState('')
-    const [doc, setDoc] = useState({})
-
-    const onDocIdChange = (e) => {
-        setError('')
-        setDocId(Number(e.target.value))
-    }
-
-    const onDocUsernameChange = (e) => {
-        setError('')
-        setUsername(e.target.value)
-    }
-
-    const onSubmitSearchByDocId = () => {
-        setLoading(true)
-
-        docApi.getById(docId, props.token)
-            .then((res) => {
-                if (res.data === '') {
-                    setTimeout(() => {
-                        setError('Документ отсутствует в базе')
-                        setLoading(false)
-                    }, 1000)
-                } else {
-                    setTimeout(() => {
-                        setError('')
-                        setDoc(res.data)
-                        setSuccess(true)
-                        setLoading(false)
-                    }, 1000)
-                }
-            })
-            .catch((e) => {
-                setError('Произошла непредвиденная ошибка')
-                setLoading(false)
-                console.log(e)
-            })
-    }
-
-    const onSubmitSearchByUsername = () => {
-        setLoading(true)
-
-        docApi.getAllByUsername(username, props.token)
-            .then((res) => {
-                console.log(res.data)
-                if (res.data === '') {
-                    setTimeout(() => {
-                        setError('Документ отсутствует в базе')
-                        setLoading(false)
-                    }, 1000)
-                } else {
-                    setTimeout(() => {
-                        setError('')
-                        setDoc(res.data)
-                        setSuccess(true)
-                        setLoading(false)
-                    }, 1000)
-                }
-            })
-            .catch((e) => {
-                setError('Произошла непредвиденная ошибка')
-                setLoading(false)
-                console.log(e)
-            })
-    }
-
-    useEffect(() => {
-
-    }, [error, success])
 
     return (
         <>
@@ -137,7 +65,7 @@ const SearchCase = (props) => {
                 </>
             ) : (
                 <>
-
+                    <Redirect push to="/login" />
                 </>
             )}
         </>
@@ -150,7 +78,7 @@ const mapToStateProps = (state) => {
       token: state.authReducer.token.accessToken,
       profile: state.authReducer.profile
     }
-  }
+}
   
 const mapDispatchToProps = (dispatch) => {
     return {
