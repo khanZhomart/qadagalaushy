@@ -8,13 +8,16 @@ import CreateEmployee from "./components/create.employee/CreateEmployee.js";
 import CreateCase from "./components/create.case/CreateCase.js";
 import SearchCase from "./components/search.case/SearchCase.js";
 import SearchEmployee from "./components/search.employee/SearchEmployee.js";
+import Main from "./components/main/Main.js";
 
 function App() {
   return (   
     <>
       <Router>
         <Switch>
-          <Route exact path="/home" component={Home} />
+          <Route exact path="/" component={Main} />
+
+          <Route path="/home" component={Home} />
           <Route path="/login" component={Login} />
 
           <Route path="/employee/create" component={CreateEmployee} />

@@ -28,7 +28,7 @@ const CreateCase = (props) => {
 
     const filled = () => {
         return caseId !== '' && responsibleEmployeeName !== '' && agency !== '' &&
-            division !== '' && assignmentDate !== '' && report !== '' && legal !== null
+            division !== '' && report !== '' && legal !== null
     }
 
     const onCaseIdChange = (e) => {
@@ -103,6 +103,8 @@ const CreateCase = (props) => {
     const onSubmit = () => {
         if (!filled())
             return setError("Заполните все поля.")
+
+        setAssignmentDate(new Date().toLocaleDateString())
 
         setLoading(true)
 
@@ -229,18 +231,8 @@ const CreateCase = (props) => {
                                                     </Form.Group>
 
                                                     <Form.Group className="mb-3">
-                                                        <Form.Label>Дата назначения</Form.Label>
-                                                        <Form.Control type="date" onChange={onAssignmentDateChange} autocomplete="new-password" placeholder="" />
-                                                    </Form.Group>
-
-                                                    <Form.Group className="mb-3">
                                                         <Form.Label>Проделанная работа</Form.Label>
                                                         <Form.Control onChange={onReportChange} autocomplete="new-password" placeholder="" />
-                                                    </Form.Group>
-
-                                                    <Form.Group className="mb-3">
-                                                        <Form.Label>Законность ЕРДР</Form.Label>
-                                                        <Form.Control onChange={onLegalChange} autocomplete="new-password" placeholder="" />
                                                     </Form.Group>
 
                                                     {loading ?

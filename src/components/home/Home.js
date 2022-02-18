@@ -3,7 +3,7 @@ import FadeIn from 'react-fade-in'
 import { FormControl, InputGroup, Dropdown, DropdownButton, Button, Badge, Form, Spinner, Card, Container, OverlayTrigger, Popover, Row, Col, Modal } from 'react-bootstrap';
 import * as Icon from 'react-bootstrap-icons'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import './home.css'
 import authApi from '../../api/auth.api';
@@ -130,37 +130,7 @@ const Home = (props) => {
         </Container>
     </>
       ) : (
-        <>
-        <div className="d-flex justify-content-center mt-5">
-            <img src="./prok.png" alt="img" />
-            <p className="title d-inline">Qadagalaushy</p>
-        </div>
-
-        <FadeIn>
-          <div className="d-flex justify-content-center mt-5">
-              <div className="box border round p-3">
-                <p>{console.log(props.profile)}</p>
-                <p className="subtitle mx-auto mt-3">Выберите действие</p>
-                <div className="px-4 btns">
-                    <div className="w-100">
-                      <Link to="/login">
-                        <Button>
-                          Войти в систему
-                        </Button>
-                      </Link>
-                    </div>
-                    <div className="w-100 mt-3">
-                      <OverlayTrigger trigger="click" placement="top" overlay={popover}>
-                        <Button variant="secondary">
-                          У меня нет аккаунта
-                        </Button>
-                      </OverlayTrigger>
-                    </div>
-                </div>
-              </div>
-          </div>
-        </FadeIn>
-        </>
+        <Redirect push to="/" />        
       )}
     </>
   )
