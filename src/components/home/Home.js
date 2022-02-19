@@ -97,6 +97,9 @@ const Home = (props) => {
                           </div>
                         :
                           <div className="mt-5">
+                            <div onClick={loadDocs} className="mb-3" style={{cursor: "pointer"}}>
+                              <Icon.ArrowClockwise size="25" />
+                            </div>
                             <Table striped bordered hover>
                               <thead>
                                 <tr>
