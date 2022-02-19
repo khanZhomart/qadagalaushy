@@ -29,7 +29,7 @@ const CreateCase = (props) => {
 
     const filled = () => {
         return caseId !== '' && responsibleEmployeeName !== '' && agency !== '' &&
-            division !== '' && report !== '' && legal !== null
+            division !== '' && report !== ''
     }
 
     const onCaseIdChange = (e) => {
@@ -87,25 +87,16 @@ const CreateCase = (props) => {
         setDivision(e.target.value)
     }
 
-    const onAssignmentDateChange = (e) => {
-        setError('')
-        setAssignmentDate(e.target.value)
-    }
-
     const onReportChange = (e) => {
         setError('')
         setReport(e.target.value)
-    }
-
-    const onLegalChange = () => {
-        setLegal(!legal)
     }
 
     const onSubmit = () => {
         if (!filled())
             return setError("Заполните все поля.")
 
-        setAssignmentDate(new Date().toLocaleDateString())
+        setAssignmentDate(new Date().toLocaleDateString().replace(/\./g, '-'))
 
         setLoading(true)
 

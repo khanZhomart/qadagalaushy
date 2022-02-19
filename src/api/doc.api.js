@@ -18,6 +18,20 @@ class DocApi {
         )
     }
 
+    async getAll(token) {
+        const header = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        }
+
+        return await axios.get(
+            `${BASE_URL}/api/doc/`,
+            header
+        )
+    }
+
     async getById(docId, token) {
         const header = {
             headers: {

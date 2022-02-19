@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import FadeIn from 'react-fade-in'
-import { FormControl, InputGroup, Dropdown, DropdownButton, Button, Badge, Form, Spinner, Card, Container, OverlayTrigger, Popover, Row, Col, Modal } from 'react-bootstrap';
+import { FormControl, InputGroup, Dropdown, DropdownButton, Button, Table, Badge, Form, Spinner, Card, Container, OverlayTrigger, Popover, Row, Col, Modal } from 'react-bootstrap';
 import * as Icon from 'react-bootstrap-icons'
 import { connect } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom';
@@ -8,78 +8,34 @@ import { Link, Redirect } from 'react-router-dom';
 import './home.css'
 import authApi from '../../api/auth.api';
 import Sidebar from '../nav/Sidebar';
+import docApi from '../../api/doc.api';
 
 const Home = (props) => {
-  const [show, setShow] = useState(false);
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [docs, setDocs] = useState([])
 
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [firstname, setFirstname] = useState('')
-  const [lastname, setLastname] = useState('')
-  const [patronymic, setPatronymic] = useState('')
-  const [role, setRole] = useState('')
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  
-  const filled = () => {
-    return username !== '' && password !== '' && confirmPassword !== ''
-      && firstname !== '' && lastname !== '' && role !== ''
-  }
-
-  const onUsernameChange = (e) => setUsername(e.target.value)
-
-  const onPasswordChange = (e) => setPassword(e.target.value)
-  const onPasswordConfirmationChange = (e) => setConfirmPassword(e.target.value)
-
-  const onFirstnameChange = (e) => setFirstname(e.target.value)
-  const onLastnameChange = (e) => setLastname(e.target.value)
-  const onPatronymicChange = (e) => setPatronymic(e.target.value)
-
-  const onRoleSelect = (e) => setRole('')
-
-  const onSubmit = () => {
+  const loadDocs = () => {
     setLoading(true)
 
-    authApi.register({
-      username: username,
-      password: password,
-      firstName: firstname,
-      lastName: lastname,
-      patronymic: patronymic,
-      role: [{
-          roleId: role
-      }]
-    })
-    .then((res) => {
-      setTimeout(() => {
-        setLoading(false)
-        handleClose()
-      }, 1000)
-    })
-    .catch((res) => {
-      setTimeout(() => {
-        setLoading(false)
-        setError('Произошла ошибка')
-      }, 1000)
-    })
+    docApi.getAll(props.token)
+      .then((res) => {
+        setTimeout(() => {
+          setDocs(res.data)
+          setLoading(false)
+        }, 1000)
+      })
+      .catch((e) => {
+        setTimeout(() => {
+          console.log(e)
+          setLoading(false)
+        }, 1000)
+      })
   }
-
-  const popover = (
-    <Popover id="popover-basic">
-      <Popover.Header as="h3">Как мне получить доступ?</Popover.Header>
-      <Popover.Body>
-        Обратитесь к руководителю, чтобы он вас зарегистрировал в системе.
-      </Popover.Body>
-    </Popover>
-  );
 
   useEffect(() => {
 
-  }, [error])
+  }, [error, loading])
 
   return (
     <>
@@ -120,7 +76,55 @@ const Home = (props) => {
                   <div className="space-block">
                     <p className="title">Журнал дел</p>
                     <div>
-                      
+                      {loading ? (
+                        <>
+                          <div className="d-flex flex-row mt-5"> 
+                            <Spinner
+                              as="span"
+                              animation="border"
+                              size="md"
+                              role="status"
+                              aria-hidden="true"
+                            />
+                            <p style={{marginLeft: "10px", fontSize: "20px", color: "gray"}}>Загрузка...</p>
+                          </div>
+                        </>
+                      ) : (
+                        docs.length === 0 ?
+                          <div onClick={loadDocs} className="d-flex flex-row mt-5" style={{cursor: "pointer"}}>
+                            <Icon.ArrowClockwise size="30" color="gray"/>
+                            <p style={{marginLeft: "10px", fontSize: "20px", color: "gray"}}>Загрузить журнал</p>
+                          </div>
+                        :
+                          <div className="mt-5">
+                            <Table striped bordered hover>
+                              <thead>
+                                <tr>
+                                  <th>№</th>
+                                  <th>Ответственный сотрудник</th>
+                                  <th>Орган</th>
+                                  <th>Подразделение</th>
+                                  <th>Дата назначения</th>
+                                  <th>Проделанная работа</th>
+                                  <th>Законность ЕРДР</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {docs.map((doc) => (
+                                  <tr>
+                                    {console.log(doc)}
+                                    <td>{doc.docId}</td>
+                                    <td>{doc.responsibleEmployee.firstName + " " + doc.responsibleEmployee.lastName}</td>
+                                    <td>{doc.agency}</td>
+                                    <td>{doc.division}</td>
+                                    <td>{doc.assignmentDate}</td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </Table>
+                          </div>
+                        
+                      )}
                     </div>
                   </div>
                 </div>
@@ -139,6 +143,7 @@ const Home = (props) => {
 const mapToStateProps = (state) => {
   return {
     authenticated: state.authReducer.token.authenticated,
+    token: state.authReducer.token.accessToken,
     profile: state.authReducer.profile
   }
 }
