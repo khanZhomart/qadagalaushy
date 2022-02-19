@@ -96,7 +96,7 @@ const Home = (props) => {
                             <p style={{marginLeft: "10px", fontSize: "20px", color: "gray"}}>Загрузить журнал</p>
                           </div>
                         :
-                          <div className="mt-5">
+                          <div className="mt-5" style={{height: "700px"}}>
                             <div onClick={loadDocs} className="mb-3" style={{cursor: "pointer"}}>
                               <Icon.ArrowClockwise size="25" />
                             </div>
@@ -117,10 +117,12 @@ const Home = (props) => {
                                   <tr>
                                     {console.log(doc)}
                                     <td>{doc.docId}</td>
-                                    <td>{doc.responsibleEmployee.firstName + " " + doc.responsibleEmployee.lastName}</td>
+                                    <td>{doc.responsibleEmployee.lastName + " " + doc.responsibleEmployee.firstName + " " + (doc.responsibleEmployee.patronymic ? doc.responsibleEmployee.patronymic : "")}</td>
                                     <td>{doc.agency}</td>
                                     <td>{doc.division}</td>
                                     <td>{doc.assignmentDate}</td>
+                                    <td>{doc.report}</td>
+                                    <td>{doc.legal}</td>
                                   </tr>
                                 ))}
                               </tbody>
