@@ -1,5 +1,6 @@
 package com.qadagalayshy.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -24,6 +25,8 @@ public class DocService implements Servable<Doc> {
     public Doc save(Doc payload) {
         if (this.docRepository.existsById(payload.getDocId()))
             return null;
+
+        payload.setAssignmentDate(java.sql.Date.valueOf(LocalDate.now()));
 
         log.info(payload.toString());
 
