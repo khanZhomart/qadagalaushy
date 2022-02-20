@@ -41,6 +41,10 @@ const SearchDocByUsername = (props) => {
             .catch((e) => {
                 setError('Произошла непредвиденная ошибка')
                 setLoading(false)
+
+                if (e.response.status === 403)
+                    return props.logout()
+
                 console.log(e)
             })
     }

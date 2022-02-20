@@ -87,9 +87,13 @@ const CreateEmployee = (props) => {
                 setSuccess("Готово! Сотрудник зарегистрирован.")
             }, 1000)
         })
-        .catch((res) => {
+        .catch((e) => {
             setTimeout(() => {
                 setLoading(false)
+
+                if (e.response.status === 403)
+                    return props.logout()
+
                 setError('Произошла ошибка')
             }, 1000)
         })
@@ -212,8 +216,19 @@ const mapToStateProps = (state) => {
       authenticated: state.authReducer.token.authenticated,
       profile: state.authReducer.profile
     }
-  }
-  
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logout: () => {
+            dispatch({
+                type: 'SIGNOUT_SUCCESS'
+            })
+        }
+    }
+}
+
 export default connect(
     mapToStateProps,
+    mapDispatchToProps
 )(CreateEmployee)

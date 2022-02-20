@@ -27,8 +27,10 @@ const Home = (props) => {
       })
       .catch((e) => {
         setTimeout(() => {
-          console.log(e)
           setLoading(false)
+
+          if (e.response.status === 403)
+            return props.logout()
         }, 1000)
       })
   }

@@ -111,9 +111,13 @@ const CreateCase = (props) => {
             report: report,
             legal: true
         }, props.token)
-        .then((res) => {
+        .then((e) => {
             setTimeout(() => {
                 setLoading(false)
+
+                if (e.response.status === 403)
+                    return props.logout()
+
                 setSuccess("Готово! Документ зарегистрирован.")
             }, 1000)
         })
