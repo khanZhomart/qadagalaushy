@@ -111,19 +111,19 @@ const CreateCase = (props) => {
             report: report,
             legal: true
         }, props.token)
-        .then((e) => {
+        .then((res) => {
+            setTimeout(() => {
+                setLoading(false)
+                setSuccess("Готово! Документ зарегистрирован.")
+            }, 1000)
+        })
+        .catch((e) => {
             setTimeout(() => {
                 setLoading(false)
 
                 if (e.response.status === 403)
                     return props.logout()
 
-                setSuccess("Готово! Документ зарегистрирован.")
-            }, 1000)
-        })
-        .catch((res) => {
-            setTimeout(() => {
-                setLoading(false)
                 setError('Произошла ошибка')
             }, 1000)
         })
@@ -228,7 +228,7 @@ const CreateCase = (props) => {
 
                                                     <Form.Group className="mb-3">
                                                         <Form.Label>Проделанная работа</Form.Label>
-                                                        <Form.Control onChange={onReportChange} autocomplete="new-password" placeholder="" />
+                                                        <Form.Control as="textarea" rows={3} onChange={onReportChange} autocomplete="new-password" placeholder="" />
                                                     </Form.Group>
 
                                                     {loading ?
