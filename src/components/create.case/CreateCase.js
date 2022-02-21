@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Button, Form, Spinner, InputGroup } from 'react-bootstrap';
+import { Container, Row, Col, Button, Form, Spinner } from 'react-bootstrap';
 import * as Icon from 'react-bootstrap-icons'
 import FadeIn from 'react-fade-in'
 import { connect } from 'react-redux';
@@ -29,7 +29,7 @@ const CreateCase = (props) => {
 
     const filled = () => {
         return caseId !== '' && responsibleEmployeeName !== '' && agency !== '' &&
-            division !== '' && report !== ''
+            division !== ''
     }
 
     const onCaseIdChange = (e) => {
@@ -108,8 +108,8 @@ const CreateCase = (props) => {
             agency: agency,
             division: division,
             assignmentDate: assignmentDate,
-            report: report,
-            legal: true
+            report: null,
+            legal: null
         }, props.token)
         .then((res) => {
             setTimeout(() => {
@@ -224,11 +224,6 @@ const CreateCase = (props) => {
                                                     <Form.Group className="mb-3">
                                                         <Form.Label>Подразделение</Form.Label>
                                                         <Form.Control onChange={onDivisionChange} autocomplete="new-password" placeholder="" />
-                                                    </Form.Group>
-
-                                                    <Form.Group className="mb-3">
-                                                        <Form.Label>Проделанная работа</Form.Label>
-                                                        <Form.Control as="textarea" rows={3} onChange={onReportChange} autocomplete="new-password" placeholder="" />
                                                     </Form.Group>
 
                                                     {loading ?

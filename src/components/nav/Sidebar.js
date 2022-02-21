@@ -16,9 +16,10 @@ const Sidebar = (props) => {
         <div className="nav-menu">
             <Nav variant="pills" className="flex-column" defaultActiveKey={history.location.pathname}>
                 <div>
-                    <p>{props.username}</p>
+                    <img src="/prok.png" alt="dsad" style={{width: "50px", height: "50px"}} />
                 </div>
                 <div className="mt-5">
+                    <p>@{props.username}</p>
                     {items.map((item, index) => 
                         <Nav.Item key={index}>
                             <Nav.Link href={item.path}>
@@ -51,7 +52,7 @@ const mapToStateProps = (state) => {
       authenticated: state.authReducer.token.authenticated,
       username: state.authReducer.username
     }
-  }
+}
 
 const mapDispatchToProps = (dispatch) => {
     return {

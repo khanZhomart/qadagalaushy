@@ -130,7 +130,6 @@ const Home = (props) => {
                               </tbody>
                             </Table>
                           </div>
-                        
                       )}
                     </div>
                   </div>

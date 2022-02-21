@@ -9,6 +9,7 @@ import CreateCase from "./components/create.case/CreateCase.js";
 import SearchCase from "./components/search.case/SearchCase.js";
 import SearchEmployee from "./components/search.employee/SearchEmployee.js";
 import Main from "./components/main/Main.js";
+import MyCase from "./components/my.case/MyCase.js";
 
 function App() {
   return (   
@@ -23,6 +24,7 @@ function App() {
           <Route path="/employee/create" component={CreateEmployee} />
           <Route path="/employee/search" component={SearchEmployee} />
           
+          <Route path="/case/me" component={MyCase} />
           <Route path="/case/create" component={CreateCase} />
           <Route path="/case/search" component={SearchCase} />
         </Switch>

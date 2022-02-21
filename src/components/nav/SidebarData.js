@@ -9,6 +9,11 @@ export const items = [
         icon: <Icon.HouseFill size={iconSize} />
     },
     {
+        title: "Мои дела",
+        path: "/case/me",
+        icon: <Icon.FolderSymlinkFill size={iconSize} />
+    },
+    {
         title: "Найти дело",
         path: "/case/search",
         icon: <Icon.FolderFill size={iconSize} />
