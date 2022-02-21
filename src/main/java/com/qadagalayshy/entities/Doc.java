@@ -40,5 +40,5 @@ public class Doc {
 
     private String report;
 
-    private Boolean legal = false;
+    private Boolean legal;
 }
