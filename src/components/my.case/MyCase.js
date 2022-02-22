@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Row, Col, Spinner, Table, Button, Badge } from 'react-bootstrap'
+import { Container, Row, Col, Spinner, Form, Modal, Table, Button, Badge, FormLabel } from 'react-bootstrap'
 import * as Icon from 'react-bootstrap-icons'
 import FadeIn from 'react-fade-in/lib/FadeIn'
 import { connect } from 'react-redux'
@@ -16,8 +16,14 @@ const MyCase = (props) => {
     const [editingReport, setEditingReport] = useState(false)
     const [editingLegal, setEditingLegal] = useState(false)
 
-    const editDocReport = (index, report) => {
-        docs[index].report = report
+    const [reportEdited, setReportEdited] = useState('')
+    const [targetDoc, setTargetDoc] = useState('')
+
+    const editDocReport = () => {
+        console.log(targetDoc)
+        setEditingReport(false)
+        docs[targetDoc].report = reportEdited
+        docApi.update(docs[targetDoc], props.token)
     }
 
     const editDocLegal = (index, legal) => {
@@ -29,11 +35,14 @@ const MyCase = (props) => {
 
         docApi.getAllByUsername(props.username, props.token)
             .then((res) => {
-                console.log(res.data)
                 setTimeout(() => {
                     setDocsLoading(false)
                     setDocs(res.data)
                 })
+            })
+            .catch((e) => {
+                if (e.response.status === 403)
+                    return props.logout()
             })
     }, [])
 
@@ -68,8 +77,8 @@ const MyCase = (props) => {
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            {docs.map((doc) => (
-                                                            <tr>
+                                                            {docs.map((doc, index) => (
+                                                            <tr key={doc.docId}>
                                                                 <td>{doc.docId}</td>
                                                                 <td>{doc.responsibleEmployee.lastName + " " + doc.responsibleEmployee.firstName + " " + (doc.responsibleEmployee.patronymic ? doc.responsibleEmployee.patronymic : "")}</td>
                                                                 <td>{doc.agency}</td>
@@ -78,13 +87,23 @@ const MyCase = (props) => {
                                                                 <td>
                                                                     {doc.report ? (
                                                                         <>
-                                                                            <span>doc.report</span><br />
-                                                                            <Badge onClick={() => setEditingReport(true)} bg="primary" style={{cursor: "pointer"}}>Изменить</Badge>
+                                                                            <span style={{whiteSpace: "pre-line"}}>{doc.report}</span><br /><br />
+                                                                            <Badge onClick={() => {
+                                                                                    setTargetDoc(index)
+                                                                                    setEditingReport(true)
+                                                                                }} bg="primary" style={{cursor: "pointer"}}>
+                                                                                Изменить
+                                                                            </Badge>
                                                                         </>
                                                                     ) : (
                                                                         <span style={{color: "red"}}>
                                                                             Неизвестно<br />
-                                                                            <Badge onClick={() => setEditingReport(true)} bg="primary" style={{cursor: "pointer"}}>Изменить</Badge>
+                                                                            <Badge onClick={() => {
+                                                                                    setTargetDoc(index)
+                                                                                    setEditingReport(true)
+                                                                                }} bg="primary" style={{cursor: "pointer"}}>
+                                                                                Изменить
+                                                                            </Badge>
                                                                         </span>
                                                                     )}
                                                                 </td>
@@ -104,6 +123,28 @@ const MyCase = (props) => {
                                                     </Table>
                                                 )}
                                             </div>
+                                            <Modal show={editingReport} onHide={() => setEditingReport(false)}>
+                                                <Modal.Header closeButton>
+                                                    <Modal.Title>Modal heading</Modal.Title>
+                                                </Modal.Header>
+                                                <Modal.Body>
+                                                    <Form.Group>
+                                                        <FormLabel>Проделанная работа</FormLabel>
+                                                        <Form.Control onChange={(e) => {
+                                                                console.log(e)
+                                                                setReportEdited(e.target.value)
+                                                            }} as="textarea" rows={3} aria-label="With textarea" />
+                                                    </Form.Group>
+                                                </Modal.Body>
+                                                <Modal.Footer>
+                                                    <Button variant="secondary" onClick={() => setEditingReport(false)}>
+                                                        Отменить
+                                                    </Button>
+                                                    <Button variant="primary" onClick={() => editDocReport()}>
+                                                        Подтвердить
+                                                    </Button>
+                                                </Modal.Footer>
+                                            </Modal>
                                         </FadeIn>
                                     </div>                                    
                                 </div>

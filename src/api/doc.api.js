@@ -18,6 +18,21 @@ class DocApi {
         )
     }
 
+    async update(doc, token) {
+        const header = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        }
+
+        return await axios.post(
+            `${BASE_URL}/api/doc/update`,
+            doc,
+            header
+        )
+    }
+
     async getAll(token) {
         const header = {
             headers: {
