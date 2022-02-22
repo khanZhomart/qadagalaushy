@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/api/doc")
 @AllArgsConstructor
+@Slf4j
 class DocController {
     private final DocService docService;
 
@@ -49,6 +51,7 @@ class DocController {
 
     @PostMapping("/update")
     public ResponseEntity<?> update(@RequestBody Doc doc) {
+        log.warn(doc.toString());
         return ResponseEntity.ok().body(
             this.docService.update(doc)
         );

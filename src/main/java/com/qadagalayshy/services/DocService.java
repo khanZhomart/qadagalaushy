@@ -61,6 +61,8 @@ public class DocService implements Servable<Doc> {
         Doc current = this.findById(payload.getDocId());
         Doc doc = DocUtil.mergeInstances(current, payload);
 
+        log.info(doc.toString());
+
         return this.docRepository.save(doc);
     }
 
