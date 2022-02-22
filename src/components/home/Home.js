@@ -123,8 +123,26 @@ const Home = (props) => {
                                     <td>{doc.agency}</td>
                                     <td>{doc.division}</td>
                                     <td>{doc.assignmentDate}</td>
-                                    <td>{doc.report}</td>
-                                    <td>{doc.legal}</td>
+                                    <td>
+                                        {doc.report ? (
+                                            <>
+                                                <span style={{whiteSpace: "pre-line"}}>{doc.report}</span><br />
+                                            </>
+                                        ) : (
+                                            <span style={{color: "red"}}>
+                                                Неизвестно<br />
+                                            </span>
+                                        )}
+                                    </td>
+                                    <td>
+                                        {doc.legal ? (
+                                            <span style={{color: "green"}}>Законно</span>
+                                        ) : (
+                                            <span style={{color: "red"}}>
+                                                Неизвестно<br />
+                                            </span>
+                                        )}
+                                    </td>
                                   </tr>
                                 ))}
                               </tbody>

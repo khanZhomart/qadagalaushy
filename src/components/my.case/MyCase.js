@@ -17,17 +17,20 @@ const MyCase = (props) => {
     const [editingLegal, setEditingLegal] = useState(false)
 
     const [reportEdited, setReportEdited] = useState('')
+    const [legalEdited, setLegalEdited] = useState(false)
     const [targetDoc, setTargetDoc] = useState('')
 
     const editDocReport = () => {
-        console.log(targetDoc)
         setEditingReport(false)
         docs[targetDoc].report = reportEdited
         docApi.update(docs[targetDoc], props.token)
     }
 
-    const editDocLegal = (index, legal) => {
-        docs[index].legal = legal
+    const editDocLegal = () => {
+        console.log(targetDoc)
+        setEditingLegal(false)
+        docs[targetDoc].legal = legalEdited
+        docApi.update(docs[targetDoc], props.token)
     }
 
     useEffect(() => {
@@ -87,7 +90,7 @@ const MyCase = (props) => {
                                                                 <td>
                                                                     {doc.report ? (
                                                                         <>
-                                                                            <span style={{whiteSpace: "pre-line"}}>{doc.report}</span><br /><br />
+                                                                            <span style={{whiteSpace: "pre-line"}}>{doc.report}</span><br />
                                                                             <Badge onClick={() => {
                                                                                     setTargetDoc(index)
                                                                                     setEditingReport(true)
@@ -113,7 +116,10 @@ const MyCase = (props) => {
                                                                     ) : (
                                                                         <span style={{color: "red"}}>
                                                                             Неизвестно<br />
-                                                                            <Badge onClick={() => setEditingLegal(true)} bg="primary" style={{cursor: "pointer"}}>Изменить</Badge>
+                                                                            <Badge onClick={() => {
+                                                                                setTargetDoc(index)
+                                                                                setEditingLegal(true)
+                                                                            }} bg="primary" style={{cursor: "pointer"}}>Изменить</Badge>
                                                                         </span>
                                                                     )}
                                                                 </td>
@@ -125,13 +131,12 @@ const MyCase = (props) => {
                                             </div>
                                             <Modal show={editingReport} onHide={() => setEditingReport(false)}>
                                                 <Modal.Header closeButton>
-                                                    <Modal.Title>Modal heading</Modal.Title>
+                                                    <Modal.Title>Изменить</Modal.Title>
                                                 </Modal.Header>
                                                 <Modal.Body>
                                                     <Form.Group>
                                                         <FormLabel>Проделанная работа</FormLabel>
                                                         <Form.Control onChange={(e) => {
-                                                                console.log(e)
                                                                 setReportEdited(e.target.value)
                                                             }} as="textarea" rows={3} aria-label="With textarea" />
                                                     </Form.Group>
@@ -141,6 +146,37 @@ const MyCase = (props) => {
                                                         Отменить
                                                     </Button>
                                                     <Button variant="primary" onClick={() => editDocReport()}>
+                                                        Подтвердить
+                                                    </Button>
+                                                </Modal.Footer>
+                                            </Modal>
+
+                                            <Modal show={editingLegal} onHide={() => setEditingLegal(false)}>
+                                                <Modal.Header closeButton>
+                                                    <Modal.Title>Изменить</Modal.Title>
+                                                </Modal.Header>
+                                                <Modal.Body>
+                                                    <Form.Group>
+                                                        <FormLabel>Законность ЕРДР</FormLabel>
+                                                        <Form.Check 
+                                                            onChange={() => setLegalEdited(true)}
+                                                            type="switch"
+                                                            id="custom-switch"
+                                                            label="Подтверждаю законность ЕРДР"
+                                                        />
+                                                        <Form.Text className="text-muted">
+                                                            Этот параметр можно изменить только один раз.
+                                                        </Form.Text>
+                                                    </Form.Group>
+                                                </Modal.Body>
+                                                <Modal.Footer>
+                                                    <Button variant="secondary" onClick={() => setEditingLegal(false)}>
+                                                        Отменить
+                                                    </Button>
+                                                    <Button variant="primary" onClick={() => {
+                                                        if (legalEdited)
+                                                            editDocLegal()
+                                                    }}>
                                                         Подтвердить
                                                     </Button>
                                                 </Modal.Footer>
