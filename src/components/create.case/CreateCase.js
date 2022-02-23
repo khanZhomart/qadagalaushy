@@ -85,11 +85,6 @@ const CreateCase = (props) => {
         setDivision(e.target.value)
     }
 
-    const onReportChange = (e) => {
-        setError('')
-        setReport(e.target.value)
-    }
-
     const onSubmit = () => {
         if (!filled())
             return setError("Заполните все поля.")
