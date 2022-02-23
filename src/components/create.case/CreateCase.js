@@ -24,8 +24,6 @@ const CreateCase = (props) => {
     const [agency, setAgency] = useState('')
     const [division, setDivision] = useState('')
     const [assignmentDate, setAssignmentDate] = useState('')
-    const [report, setReport] = useState('')
-    const [legal, setLegal] = useState(null)
 
     const filled = () => {
         return caseId !== '' && responsibleEmployeeName !== '' && agency !== '' &&

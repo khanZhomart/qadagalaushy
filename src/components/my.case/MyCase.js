@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Row, Col, Spinner, Form, Modal, Table, Button, Badge, FormLabel } from 'react-bootstrap'
-import * as Icon from 'react-bootstrap-icons'
+import { Container, Row, Col, Form, Modal, Table, Button, Badge, FormLabel } from 'react-bootstrap'
 import FadeIn from 'react-fade-in/lib/FadeIn'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min'
@@ -119,7 +118,12 @@ const MyCase = (props) => {
                                                                             <Badge onClick={() => {
                                                                                 setTargetDoc(index)
                                                                                 setEditingLegal(true)
-                                                                            }} bg="primary" style={{cursor: "pointer"}}>Изменить</Badge>
+                                                                                }} 
+                                                                                bg="primary"    
+                                                                                style={{cursor: "pointer"}}
+                                                                            >
+                                                                                Изменить
+                                                                            </Badge>
                                                                         </span>
                                                                     )}
                                                                 </td>
@@ -138,7 +142,11 @@ const MyCase = (props) => {
                                                         <FormLabel>Проделанная работа</FormLabel>
                                                         <Form.Control onChange={(e) => {
                                                                 setReportEdited(e.target.value)
-                                                            }} as="textarea" rows={3} aria-label="With textarea" />
+                                                            }} 
+                                                            as="textarea" 
+                                                            rows={3} 
+                                                            aria-label="With textarea" 
+                                                        />
                                                     </Form.Group>
                                                 </Modal.Body>
                                                 <Modal.Footer>
