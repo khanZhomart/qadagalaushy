@@ -1,1 +1,1 @@
-worker: server -s build
+worker: npx serve -s build
