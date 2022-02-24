@@ -4,11 +4,6 @@ import { BASE_URL } from "../config"
 class AuthApi {
 
     async login(username, password) {
-        const params = new URLSearchParams()
-
-        params.append('username', username)
-        params.append('password', password)
-
         const headers = {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -16,8 +11,7 @@ class AuthApi {
         }
 
         return await axios.post(
-            `${BASE_URL}/api/user/login`,
-            params,
+            `${BASE_URL}/api/user/login?username=${username}&password=${password}`,
             headers
         )
     }
