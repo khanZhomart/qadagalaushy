@@ -8,6 +8,8 @@ import authApi from '../../api/auth.api';
 import './login.css'
 
 const Login = (props) => {
+  const dispatch = useDispatch()
+
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -27,8 +29,11 @@ const Login = (props) => {
     try {
       setError('')
       setLoading(true)
-      const res = await authApi.login(username, password)
-      console.log(res.status)
+
+      const auth = await authApi.login(username, password)
+      const user = await authApi.loadByUsername(username, auth.data.accessToken) 
+
+      return props.login(user, auth)
     } catch (e) {
       if (e.response.status < 500)
         return setError('Неправильное имя пользователя или пароль.')
@@ -126,6 +131,34 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+      login: (user, auth) => {
+          dispatch({
+            type: 'SIGNIN_SUCCESS',
+            payload: {
+                username: user.username,
+                uid: user.userId,
+                profile: {
+                  firstname: user.firstName,
+                  lastname: user.lastName,
+                  patronymic: user.patronymic,
+                  prosecutor: user.prosecutor,
+                  position: user.position,
+                  role: user.roles[0].name
+                },
+                token: {
+                    authenticated: true,
+                    accessToken: auth.data.accessToken,
+                    refreshToken: auth.data.refreshToken,
+                }
+            }
+          })
+      }
+  }
+}
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Login)
