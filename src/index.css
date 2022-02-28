@@ -3,3 +3,29 @@
 * {
     font-family: 'Roboto', sans-serif;
 }
+
+body {
+    background-color: #f6f8fa;
+}
+
+.border-dotted {
+    border-style: dotted;
+    border-width: 2px;
+    border-color: lightgray;
+}
+
+.rounded-extra {
+    border-radius: 1vh;
+}
+
+.text-500 {
+    font-weight: 500;
+}
+
+.text-700 {
+    font-weight: 700;
+}
+
+.label-input {
+    font-size: 14px;
+}
