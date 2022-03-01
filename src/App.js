@@ -1,14 +1,14 @@
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 
-import Home from './components/home/Home.js'
 import CreateEmployee from "./components/create.employee/CreateEmployee.js";
 import CreateCase from "./components/create.case/CreateCase.js";
 import SearchCase from "./components/search.case/SearchCase.js";
 import SearchEmployee from "./components/search.employee/SearchEmployee.js";
-import Main from "./components/main/Main.js";
 import MyCase from "./components/my.case/MyCase.js";
 import LoginPage from "./pages/login-page/LoginPage.js";
+import HomePage from './pages/home-page/HomePage.js'
 import MainPage from "./pages/main-page/MainPage.js";
+import NavigationBar from "./components/nav/NavigationBar.js";
 
 function App() {
   return (   
@@ -17,7 +17,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={MainPage} />
 
-          <Route path="/home" component={Home} />
+          <Route path="/home" component={HomePage} />
           <Route path="/login" component={LoginPage} />
 
           <Route path="/employee/create" component={CreateEmployee} />
