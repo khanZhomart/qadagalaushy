@@ -8,13 +8,14 @@ import SearchEmployee from "./components/search.employee/SearchEmployee.js";
 import Main from "./components/main/Main.js";
 import MyCase from "./components/my.case/MyCase.js";
 import LoginPage from "./pages/login-page/LoginPage.js";
+import MainPage from "./pages/main-page/MainPage.js";
 
 function App() {
   return (   
     <>
       <Router>
         <Switch>
-          <Route exact path="/" component={Main} />
+          <Route exact path="/" component={MainPage} />
 
           <Route path="/home" component={Home} />
           <Route path="/login" component={LoginPage} />

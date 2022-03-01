@@ -32,10 +32,12 @@ const Login = (props) => {
 
       const auth = await authApi.login(username, password)
       const user = await authApi.loadByUsername(username, auth.data.accessToken) 
-
-      return props.login(user, auth)
+      console.log(user)
+      return props.login(user.data, auth.data)
     } catch (e) {
-      if (e.response.status < 500)
+      console.log(e)
+
+      if (e.response?.status < 500)
         return setError('Неправильное имя пользователя или пароль.')
 
       return setError('Произошла непредвиденная ошибка.')
@@ -48,12 +50,12 @@ const Login = (props) => {
     <Form style={{width: "300px"}}>
       <div>
         <div>
-          <img 
+          {/* <img 
             className="d-block mx-auto"
             style={{width: "75px", height: "auto"}}
             src="./prok.png" 
             alt="proc" 
-          />
+          /> */}
         </div>
         <p className="fs-4 text-center">Войти в систему</p>
       </div>
@@ -134,7 +136,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
       login: (user, auth) => {
-          dispatch({
+          return dispatch({
             type: 'SIGNIN_SUCCESS',
             payload: {
                 username: user.username,
@@ -149,8 +151,8 @@ const mapDispatchToProps = (dispatch) => {
                 },
                 token: {
                     authenticated: true,
-                    accessToken: auth.data.accessToken,
-                    refreshToken: auth.data.refreshToken,
+                    accessToken: auth.accessToken,
+                    refreshToken: auth.refreshToken,
                 }
             }
           })

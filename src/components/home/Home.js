@@ -158,7 +158,7 @@ const Home = (props) => {
         </Container>
     </>
       ) : (
-        <Redirect push to="/" />        
+        <Redirect push to="/login" />        
       )}
     </>
   )
