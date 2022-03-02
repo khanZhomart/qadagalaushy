@@ -29,3 +29,35 @@ body {
 .label-input {
     font-size: 14px;
 }
+
+.w-95 {
+    width: 95%;
+}
+
+.w-90 {
+    width: 90%;
+}
+
+.w-35 {
+    width: 35%;
+}
+
+.w-30 {
+    width: 30%;
+}
+
+header {
+    
+}
+
+.box-success {
+    background-color: #2da44e;
+}
+
+.top-60 {
+    top: 60%;
+}
+
+.top-55 {
+    top: 55%;
+}

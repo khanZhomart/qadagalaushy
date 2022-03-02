@@ -1,7 +1,9 @@
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { Container, Nav, NavDropdown, Navbar } from 'react-bootstrap'
+import * as Icon from 'react-bootstrap-icons'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min'
+import { items } from './NavbarData.js'
 
 function useWindowSize() {
     const [size, setSize] = useState([0, 0]);
@@ -20,35 +22,60 @@ function useWindowSize() {
 }
 
 const NavigationBar = (props) => {
-    const [width, height] = useWindowSize()
+    const [classes, setClasses] = useState("mx-auto mt-2 ")
 
+    useLayoutEffect(() => {
+        window.addEventListener('resize', () => {
+            if (window.innerWidth <= 800)
+                setClasses("mx-auto mt-2 w-95")
+            else
+                setClasses("mx-auto mt-2 w-90")
+        })
+    }, [])
 
+    useEffect(() => {
+
+    }, [classes])
 
     return (
         <>
-            <div className="mx-auto mt-2" style={{width: "95%"}}>
+            <div className="">
                 <Navbar 
-                    className="rounded-extra"
                     bg="dark" 
                     variant="dark" 
                     expand="lg"
                 >
                     <Container>
-                        <Navbar.Brand  href="#home">
+                        <Navbar.Brand>
                             Qadagalauhsy <span className="text-muted" style={{fontSize: "15px"}}>v0.7 beta</span>
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse className="justify-content-end">
                             <Nav>
-                                <Nav.Link href="#home">Главная</Nav.Link>
-                                <NavDropdown 
-                                    title="Dropdown" 
+                                {/* <Nav.Link href="#home">Главная</Nav.Link> */}
+                                <NavDropdown
+                                    className="me-5"
+                                    title="Панель" 
                                     id="basic-nav-dropdown"
                                 >
-                                    <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                                    <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                                    <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                                    <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                                    {items.map((item, index) => {
+                                        return (
+                                            <NavDropdown.Item
+                                                href={item.path}
+                                                key={index}
+                                            >
+                                                {item.icon}
+                                                <span className="px-2">{item.title}</span>
+                                            </NavDropdown.Item>
+                                        )
+                                    })}
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item
+                                        onClick={() => props.logout()}
+                                    >
+                                        <Icon.BoxArrowLeft size="20" />
+                                        <span className="px-2">Выйти</span>
+                                    </NavDropdown.Item>
                                 </NavDropdown>
                             </Nav>
                         </Navbar.Collapse>

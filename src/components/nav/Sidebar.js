@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Nav, Spinner } from 'react-bootstrap'
 import { createBrowserHistory } from 'history'
-import { items } from './SidebarData.js'
 import { connect } from 'react-redux';
 
 import './sidebar.css'
@@ -20,7 +19,7 @@ const Sidebar = (props) => {
                 </div>
                 <div className="mt-5">
                     <p>@{props.username}</p>
-                    {items.map((item, index) => 
+                    {/* {items.map((item, index) => 
                         <Nav.Item key={index}>
                             <Nav.Link href={item.path}>
                                 {item.icon}
@@ -29,7 +28,7 @@ const Sidebar = (props) => {
                                 </span>
                             </Nav.Link>
                         </Nav.Item>
-                    )}
+                    )} */}
                 </div>
             </Nav>
 

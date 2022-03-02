@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min'
 import authApi from '../../api/auth.api'
@@ -8,6 +8,10 @@ import './loginpage.css'
 
 const LoginPage = (props) => {
     
+    useEffect(() => {
+        document.title = "Авторизация"
+    })
+
     return (
         props.authenticated ? (
             <>
