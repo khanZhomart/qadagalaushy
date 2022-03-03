@@ -32,11 +32,8 @@ const Login = (props) => {
 
       const auth = await authApi.login(username, password)
       const user = await authApi.loadByUsername(username, auth.data.accessToken) 
-      console.log(user)
       return props.login(user.data, auth.data)
     } catch (e) {
-      console.log(e)
-
       if (e.response?.status < 500)
         return setError('Неправильное имя пользователя или пароль.')
 

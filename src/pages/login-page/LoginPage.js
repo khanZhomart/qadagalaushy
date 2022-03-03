@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min'
-import authApi from '../../api/auth.api'
 import Login from '../../components/login/Login.js'
 
 import './loginpage.css'

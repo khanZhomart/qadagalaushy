@@ -11,7 +11,7 @@ import './homepage.css'
 const HomePage = (props) => {
 
   useEffect(() => {
-    document.title = "Домой"
+    document.title = "Журнал"
   })
 
   return (
@@ -22,14 +22,22 @@ const HomePage = (props) => {
         fluid
       >
         <Row>
-          <Col sm md={12} lg={3}>
+          <Col sm md={12} lg={2}>
             <UserCard />
           </Col>
-          <Col sm md={12} lg={6}>
+          <Col sm md={12} lg={7}>
             <Panel />
           </Col>
           <Col sm md={12} lg={3}>
-            <p>3 of 3</p>
+            <div>
+              <p className="text-500 fs-5">Untitled</p>
+              <div
+                style={{height: "300px"}} 
+                className="border rounded-extra bg-white p-3"
+              >
+                *content*
+              </div>
+            </div>
           </Col>
         </Row>
       </Container>
