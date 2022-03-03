@@ -1,6 +1,7 @@
 package com.qadagalayshy.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -49,8 +50,10 @@ public class UserService implements Servable<User>, UserDetailsService {
     }
 
     @Override
-    public User findById(Long id) {
-        return this.userRepository.findById(id).orElse(null);
+    public List<User> findById(Long id) {
+        return Arrays.asList(
+            this.userRepository.findById(id).orElse(null)
+        );
     }
 
     public User findByUsername(String username) {
@@ -59,7 +62,7 @@ public class UserService implements Servable<User>, UserDetailsService {
 
     @Override
     public User update(User payload) {
-        User current = this.findById(payload.getUserId());
+        User current = this.findById(payload.getUserId()).get(0);
         User user = UserUtil.mergeInstances(current, payload);
 
         return this.userRepository.save(user);

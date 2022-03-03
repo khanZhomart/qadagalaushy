@@ -6,7 +6,7 @@ interface Servable<T> {
 
     T save(T payload);
     List<T> findAll();
-    T findById(Long id);
+    List<T> findById(Long id);
     T update(T payload);
     void remove(Long id);
 }

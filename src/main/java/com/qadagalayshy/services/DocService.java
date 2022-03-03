@@ -1,6 +1,7 @@
 package com.qadagalayshy.services;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -52,13 +53,15 @@ public class DocService implements Servable<Doc> {
     }
 
     @Override
-    public Doc findById(Long id) {
-        return this.docRepository.findById(id).orElse(null);
+    public List<Doc> findById(Long id) {
+        return Arrays.asList(
+            this.docRepository.findById(id).orElse(null)
+        );
     }
 
     @Override
     public Doc update(Doc payload) {
-        Doc current = this.findById(payload.getDocId());
+        Doc current = this.findById(payload.getDocId()).get(0);
         Doc doc = DocUtil.mergeInstances(current, payload);
 
         log.info(doc.toString());

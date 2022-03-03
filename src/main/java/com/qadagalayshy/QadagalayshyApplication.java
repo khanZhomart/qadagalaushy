@@ -52,8 +52,8 @@ public class QadagalayshyApplication {
 
 			User user2 = User.builder()
 				.username("nur89")
-				.firstName("Керімбаев")
-				.lastName("Нұржан")
+				.firstName("Нұржан")
+				.lastName("Керімбаев")
 				.patronymic("Талғатұлы")
 				.prosecutor("Есильский район")
 				.password("12345")

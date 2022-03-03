@@ -27,7 +27,7 @@ public class RoleService implements Servable<Role> {
     }
 
     @Override
-    public Role findById(Long id) {
+    public List<Role> findById(Long id) {
         // TODO Auto-generated method stub
         return null;
     }
