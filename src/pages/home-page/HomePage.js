@@ -16,7 +16,6 @@ const HomePage = (props) => {
 
   return (
     <>
-      <NavigationBar />
       <Container 
         className="px-4 mt-5"
         fluid

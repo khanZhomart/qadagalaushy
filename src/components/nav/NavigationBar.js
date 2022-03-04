@@ -41,11 +41,13 @@ const NavigationBar = (props) => {
         <>
             <div className="">
                 <Navbar 
-                    bg="dark" 
-                    variant="dark" 
-                    expand="lg"
+                    className="border"
+                    bg="white"
                 >
-                    <Container>
+                    <Container 
+                        className=""
+                        fluid
+                    >
                         <Navbar.Brand>
                             Qadagalauhsy <span className="text-muted" style={{fontSize: "15px"}}>v0.7 beta</span>
                         </Navbar.Brand>
