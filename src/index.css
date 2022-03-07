@@ -18,6 +18,10 @@ body {
     border: none;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 .rounded-extra {
     border-radius: 1vh;
 }

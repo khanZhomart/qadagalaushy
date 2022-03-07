@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min'
 import { items } from './NavbarData.js'
 
+import './nav.css'
+
 function useWindowSize() {
     const [size, setSize] = useState([0, 0]);
 
@@ -41,22 +43,41 @@ const NavigationBar = (props) => {
         <>
             <div className="">
                 <Navbar 
-                    className="border"
-                    bg="white"
+                    className=""
+                    bg="dark"
+                    variant='dark'
+                    expand="lg"
                 >
                     <Container 
                         className=""
                         fluid
                     >
                         <Navbar.Brand>
-                            Qadagalauhsy <span className="text-muted" style={{fontSize: "15px"}}>v0.7 beta</span>
+                            <img 
+                                src="/prok.png"
+                                width="30"
+                                height="30"
+                                alt="prok"
+                            />
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                        <Navbar.Collapse className="justify-content-end">
+                        <Navbar.Collapse className="justify-content-start">
                             <Nav>
-                                {/* <Nav.Link href="#home">Главная</Nav.Link> */}
+                                <Nav.Link className="items" href="/home">
+                                    Журнал
+                                </Nav.Link>
+                                <Nav.Link className="items" href="/case/create">
+                                    Новое дело
+                                </Nav.Link>
+                                <Nav.Link 
+                                    className="items"
+                                    onClick={() => props.logout()}    
+                                >
+                                    Выйти из аккаунта
+                                </Nav.Link>
+                            </Nav>
+                            {/* <Nav>
                                 <NavDropdown
-                                    className="me-5"
                                     title="Панель" 
                                     id="basic-nav-dropdown"
                                 >
@@ -79,7 +100,7 @@ const NavigationBar = (props) => {
                                         <span className="px-2">Выйти</span>
                                     </NavDropdown.Item>
                                 </NavDropdown>
-                            </Nav>
+                            </Nav> */}
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>

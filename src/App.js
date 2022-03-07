@@ -3,6 +3,7 @@ import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 import LoginPage from "./pages/login-page/LoginPage.js";
 import HomePage from './pages/home-page/HomePage.js'
 import MainPage from "./pages/main-page/MainPage.js";
+import CreateCasePage from "./pages/create-case-page/CreateCasePage.js";
 
 function App() {
   return (   
@@ -13,6 +14,7 @@ function App() {
 
           <Route path="/home" component={HomePage} />
           <Route path="/login" component={LoginPage} />
+          <Route path="/case/create" component={CreateCasePage} />
 
           {/* <Route path="/employee/create" component={CreateEmployee} />
           <Route path="/employee/search" component={SearchEmployee} />

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
+import FadeIn from 'react-fade-in/lib/FadeIn'
+import { Col, Container, Fade, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import NavigationBar from '../../components/nav/NavigationBar'
@@ -16,6 +17,7 @@ const HomePage = (props) => {
 
   return (
     <>
+      <NavigationBar />
       <Container 
         className="px-4 mt-5"
         fluid
@@ -25,18 +27,22 @@ const HomePage = (props) => {
             <UserCard />
           </Col>
           <Col sm md={12} lg={7}>
-            <Panel />
+            <FadeIn>
+              <Panel />
+            </FadeIn>
           </Col>
           <Col sm md={12} lg={3}>
-            <div>
-              <p className="text-500 fs-5">Untitled</p>
-              <div
-                style={{height: "300px"}} 
-                className="border rounded-extra bg-white p-3"
-              >
-                *content*
+            <FadeIn>
+              <div>
+                <p className="text-500 fs-5">Untitled</p>
+                <div
+                  style={{height: "300px"}} 
+                  className="border rounded-extra bg-white p-3"
+                >
+                  *content*
+                </div>
               </div>
-            </div>
+            </FadeIn>
           </Col>
         </Row>
       </Container>
