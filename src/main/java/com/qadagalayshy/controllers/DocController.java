@@ -59,6 +59,8 @@ class DocController {
 
     @PostMapping("/remove/{docId}")
     public ResponseEntity<?> remove(@PathVariable String docId) throws NumberFormatException {
-        return null;
+        this.docService.remove(Long.parseLong(docId));
+
+        return ResponseEntity.ok("success");
     }
 }
