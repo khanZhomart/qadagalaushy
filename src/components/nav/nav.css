@@ -1,0 +1,7 @@
+.items {
+    color: white !important;
+}
+
+.items:hover {
+    filter: opacity(0.5)
+}
