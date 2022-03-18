@@ -7,7 +7,7 @@ import { Link, Redirect } from 'react-router-dom';
 
 import './home.css'
 import authApi from '../../api/auth.api';
-import Sidebar from '../nav/Sidebar';
+import Sidebar from '../../components/nav/Sidebar';
 import docApi from '../../api/doc.api';
 
 const Home = (props) => {
@@ -158,7 +158,7 @@ const Home = (props) => {
         </Container>
     </>
       ) : (
-        <Redirect push to="/" />        
+        <Redirect push to="/login" />        
       )}
     </>
   )

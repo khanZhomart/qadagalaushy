@@ -4,7 +4,7 @@ import * as Icon from 'react-bootstrap-icons'
 import FadeIn from 'react-fade-in/lib/FadeIn';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
-import Sidebar from '../nav/Sidebar';
+import Sidebar from '../../components/nav/Sidebar';
 
 import './create.employee.css'
 import '../home/home.css'

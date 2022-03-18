@@ -4,7 +4,7 @@ import FadeIn from 'react-fade-in/lib/FadeIn'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min'
 import docApi from '../../api/doc.api'
-import Sidebar from '../nav/Sidebar'
+import Sidebar from '../../components/nav/Sidebar'
 
 import './mycase.css'
 

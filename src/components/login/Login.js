@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Button, Spinner } from 'react-bootstrap';
+import { Form, Button, Spinner, Alert } from 'react-bootstrap';
 import FadeIn from 'react-fade-in'
 import { useDispatch, connect } from 'react-redux'
 import { Redirect, Link } from 'react-router-dom'
@@ -12,112 +12,117 @@ const Login = (props) => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
-  const [loading, setLoading] = useState(false)
-
-  const onUsernameChange = (e) => {
+  const handleUsernameChange = (e) => {
     setError('')
     setUsername(e.target.value)
   }
 
-  const onPasswordChange = (e) => {
+  const handlePasswordChange = (e) => {
     setError('')
     setPassword(e.target.value)
   }
 
-  const onSubmitPress = () => {
-    setLoading(true)
-    
-    authApi.login(username, password)
-      .then((authRes) => {
-        authApi.loadByUsername(username, authRes.data.accessToken)
-          .then((res) => {
-            const user = res.data
-            console.log(user)
-            return dispatch({
-              type: 'SIGNIN_SUCCESS',
-              payload: {
-                  username: user.username,
-                  uid: user.userId,
-                  profile: {
-                    firstname: user.firstName,
-                    lastname: user.lastName,
-                    patronymic: user.patronymic,
-                    prosecutor: user.prosecutor,
-                    position: user.position,
-                    role: user.roles[0].name
-                  },
-                  token: {
-                      authenticated: true,
-                      accessToken: authRes.data.accessToken,
-                      refreshToken: authRes.data.refreshToken,
-                  }
-              }
-            })
-          })
+  const handleSubmit = async () => {
+    try {
+      setError('')
+      setLoading(true)
 
-          setLoading(false)
-      })
-      .catch((e) => {
-        setTimeout(() => {
-          setError('Неправильное имя пользователя или пароль')
-          setLoading(false)
-        }, 1000)
-      })
+      const auth = await authApi.login(username, password)
+      const user = await authApi.loadByUsername(username, auth.data.accessToken) 
+      return props.login(user.data, auth.data)
+    } catch (e) {
+      if (e.response?.status < 500)
+        return setError('Неправильное имя пользователя или пароль.')
+
+      return setError('Произошла непредвиденная ошибка.')
+    } finally {
+      setLoading(false)
+    }
   }
 
-  useEffect(() => {
-
-  }, [error])
-
   return (
-    <FadeIn>
-      {props.authenticated ? (
-          <Redirect push to="/home" />
-        ) : (
-          <div className="login-box d-flex justify-content-center mt-5">
-              <Form className="login-form p-5">
-                <p>Вход в систему</p>
+    <Form style={{width: "300px"}}>
+      <div>
+        <div>
+          {/* <img 
+            className="d-block mx-auto"
+            style={{width: "75px", height: "auto"}}
+            src="./prok.png" 
+            alt="proc" 
+          /> */}
+        </div>
+        <p className="fs-4 text-center">Войти в систему</p>
+      </div>
 
-                <Form.Text style={{display: 'block', color: 'red'}}>
-                    {error}   
-                </Form.Text>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>Имя пользователя</Form.Label>
-                  <Form.Control onChange={onUsernameChange} type="text" placeholder="" />
-                  <Form.Text className="text-muted">
-                    Например @username
-                  </Form.Text>
-                </Form.Group>
+      {error === '' ? (
+        <>
+        </>
+      ) : (
+        <FadeIn>
+          <Alert
+            className="rounded-extra label-input"
+            variant="danger"
+          >
+          {error}
+        </Alert>
+        </FadeIn>
+      )}
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                  <Form.Label>Пароль</Form.Label>
-                  <Form.Control onChange={onPasswordChange} type="password" placeholder="" />
-                </Form.Group>
-
-                {loading ? (
-                  <Button className="mt-2" variant="primary" disabled>
-                    <Spinner
-                      as="span"
-                      animation="border"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
-                    />
-                  </Button>
-                ) : (
-                  <Button className="mt-2" onClick={onSubmitPress} variant="primary">
-                    <b>Отправить</b>
-                  </Button>
-                )}
-              </Form>
-          </div>
-        )
-      }
-    </FadeIn>
+      <div className="border p-3 bg-white rounded-extra mt-3">
+        <Form.Group className="mb-3">
+          <Form.Label className="label-input">Имя пользователя</Form.Label>
+          <Form.Control
+            className="rounded-extra"
+            type="text"
+            size="sm"
+            onChange={handleUsernameChange}
+            disabled={loading}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label className="label-input">Пароль</Form.Label>
+          <Form.Control 
+            className="rounded-extra"
+            type="password"
+            size="sm"
+            onChange={handlePasswordChange}
+            disabled={loading}
+          />
+        </Form.Group>
+        <Button
+            className="w-100 rounded-extra"
+            variant="primary"
+            size="sm"
+            onClick={handleSubmit}
+            disabled={loading}
+          >
+            {loading ? (
+              <>
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+                <span className="px-2 text-500">Вход в аккаунт...</span>
+              </>
+            ) : (
+              <>
+                <span className="text-500">Войти</span>
+              </>
+            )}
+          </Button>
+      </div>
+      <div className="d-flex justify-content-center border-dotted rounded-extra mt-2 p-3">
+        <span className="text-center text-muted" style={{fontSize: "12px"}}>Нет аккаунта? <span className="text-700">Обратитесь к руководителю</span></span>
+      </div>
+    </Form>
   )
-};
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -125,6 +130,34 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+      login: (user, auth) => {
+          return dispatch({
+            type: 'SIGNIN_SUCCESS',
+            payload: {
+                username: user.username,
+                uid: user.userId,
+                profile: {
+                  firstname: user.firstName,
+                  lastname: user.lastName,
+                  patronymic: user.patronymic,
+                  prosecutor: user.prosecutor,
+                  position: user.position,
+                  role: user.roles[0].name
+                },
+                token: {
+                    authenticated: true,
+                    accessToken: auth.accessToken,
+                    refreshToken: auth.refreshToken,
+                }
+            }
+          })
+      }
+  }
+}
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Login)
