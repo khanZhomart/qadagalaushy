@@ -63,12 +63,12 @@ const NavigationBar = (props) => {
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse className="justify-content-start">
                             <Nav>
-                                <Nav.Link className="items" href="/home">
+                                {/* <Nav.Link className="items" href="/home">
                                     Журнал
                                 </Nav.Link>
                                 <Nav.Link className="items" href="/case/create">
                                     Новое дело
-                                </Nav.Link>
+                                </Nav.Link> */}
                                 <Nav.Link 
                                     className="items"
                                     onClick={() => props.logout()}    

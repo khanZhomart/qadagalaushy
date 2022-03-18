@@ -8,6 +8,7 @@ import Panel from '../../components/panel/Panel'
 import UserCard from '../../components/user.card/UserCard'
 
 import './homepage.css'
+import MyCases from '../../components/my.cases/MyCases'
 
 const HomePage = (props) => {
 
@@ -28,7 +29,11 @@ const HomePage = (props) => {
           </Col>
           <Col sm md={12} lg={7}>
             <FadeIn>
-              <Panel />
+              {props.role === 'Руководитель' || props.role === 'Менеджер' ? (
+                <Panel />
+              ) : (
+                <MyCases />
+              )}
             </FadeIn>
           </Col>
           <Col sm md={12} lg={3}>
@@ -59,7 +64,8 @@ const HomePage = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-      authenticated: state.authReducer.token.authenticated
+      authenticated: state.authReducer.token.authenticated,
+      role: state.authReducer.profile.role
   }
 }
 
