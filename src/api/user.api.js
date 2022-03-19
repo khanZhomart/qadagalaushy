@@ -31,6 +31,20 @@ class UserApi {
             header
         )
     }
+
+    async getAll(token) {
+        const header = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        }
+
+        return await axios.get(
+            `${BASE_URL}/api/user/`,
+            header
+        )
+    }
 }
 
 export default new UserApi()
