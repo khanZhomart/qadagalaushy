@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Badge, Form, ListGroup, Spinner } from 'react-bootstrap'
+import { Badge, Form, ListGroup, Spinner, Button } from 'react-bootstrap'
+import * as Icon from 'react-bootstrap-icons'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import userApi from '../../api/user.api.js'
@@ -97,6 +99,7 @@ const EmployeesPanel = (props) => {
                     <Form.Control
                         className="rounded-extra"
                         type="text"
+                        size="sm"
                         value={searchRequest}
                         placeholder="Найти сотрудника"
                         disabled={search === 'Все сотрудники'}
@@ -113,6 +116,22 @@ const EmployeesPanel = (props) => {
                             <option value="Все сотрудники">Все сотрудники</option>
                             <option>Поиск по никнейму</option>
                         </Form.Select>
+                        <div className="d-inline">
+                            <Link to="/employee/create">
+                                <Button
+                                    className="mx-2 rounded-extra box-success border"
+                                    size="sm"
+                                >
+                                    <div className="d-inline">
+                                        <Icon.PersonPlusFill
+                                            className="mb-1" 
+                                            size="15" 
+                                        />
+                                    </div>
+                                    <span className="text-500 mx-1">Добавить</span>
+                                </Button>
+                            </Link>
+                        </div>
                     </div>
                     <div className="mt-1">
                         <Badge

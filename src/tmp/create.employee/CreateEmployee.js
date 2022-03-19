@@ -79,7 +79,7 @@ const CreateEmployee = (props) => {
                 {
                     roleId: role
                 }
-        ]
+            ]
         })
         .then((res) => {
             setTimeout(() => {

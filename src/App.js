@@ -4,6 +4,7 @@ import LoginPage from "./pages/login-page/LoginPage.js";
 import HomePage from './pages/home-page/HomePage.js'
 import MainPage from "./pages/main-page/MainPage.js";
 import CreateCasePage from "./pages/create-case-page/CreateCasePage.js";
+import CreateEmployeePage from "./pages/create-employee-page/CreateEmployeePage.js";
 
 function App() {
   return (   
@@ -16,6 +17,7 @@ function App() {
           <Route path="/login" component={LoginPage} />
           <Route path="/case/create" component={CreateCasePage} />
 
+          <Route path="/employee/create" component={CreateEmployeePage} />
           {/* <Route path="/employee/create" component={CreateEmployee} />
           <Route path="/employee/search" component={SearchEmployee} />
           

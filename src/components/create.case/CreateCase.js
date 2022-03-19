@@ -116,7 +116,7 @@ const CreateCase = (props) => {
                                 className="rounded-extra label-input"
                                 variant="danger"
                             >
-                            {error}
+                                {error}
                             </Alert>
                         </FadeIn>
                     )}
@@ -126,7 +126,7 @@ const CreateCase = (props) => {
                                 className="rounded-extra label-input"
                                 variant="success"
                             >
-                                Дело успешно добавлено в базу
+                                Дело успешно добавлено в базу!
                             </Alert>
                         </FadeIn>
                     ) : (
