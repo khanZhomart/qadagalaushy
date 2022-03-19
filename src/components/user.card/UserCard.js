@@ -14,7 +14,7 @@ const UserCard = ({ user, username, logout }) => {
     
     return (
         <div>
-            <p className="text-500 fs-5">Сотрудник</p>
+            <p className="text-500 fs-5">Мой профиль</p>
             <div className="position-relative border rounded-extra bg-white p-3">
                 <p
                     style={{margin: "0"}} 

@@ -9,6 +9,7 @@ import UserCard from '../../components/user.card/UserCard'
 
 import './homepage.css'
 import MyCases from '../../components/my.cases/MyCases'
+import EmployeesPanel from '../../components/employees.panel/EmployeesPanel'
 
 const HomePage = (props) => {
 
@@ -38,15 +39,7 @@ const HomePage = (props) => {
           </Col>
           <Col sm md={12} lg={3}>
             <FadeIn>
-              <div>
-                <p className="text-500 fs-5">Untitled</p>
-                <div
-                  style={{height: "300px"}} 
-                  className="border rounded-extra bg-white p-3"
-                >
-                  *content*
-                </div>
-              </div>
+                <EmployeesPanel />
             </FadeIn>
           </Col>
         </Row>
