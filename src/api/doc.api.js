@@ -82,7 +82,7 @@ class DocApi {
                 'Authorization': `Bearer ${token}`
             }
         }
-
+        
         return await axios.get(
             `${BASE_URL}/api/doc/user/${username}`,
             header

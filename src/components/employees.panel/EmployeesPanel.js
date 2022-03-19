@@ -145,8 +145,12 @@ const EmployeesPanel = (props) => {
                                 </div>
                             </div>
                         ) : (
-                            <div style={{ fontSize: "15px" }} className="border rounded-extra mt-4">
-                                <ListGroup as="ol" numbered>
+                            <div style={{ fontSize: "15px" }} className="mt-3">
+                                <ListGroup 
+                                    className="rounded-extra"
+                                    as="ol" 
+                                    numbered
+                                >
                                     {employees.map((e, index) => {
                                         return (
                                             <ListGroup.Item

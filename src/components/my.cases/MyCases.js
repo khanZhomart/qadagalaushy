@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import * as Icon from 'react-bootstrap-icons'
-import { Form, Button, Badge, Table, Spinner } from 'react-bootstrap'
+import { Modal, FormLabel, Form, Button, Badge, Table, Spinner } from 'react-bootstrap'
 
 import docApi from '../../api/doc.api.js'
 import filters from '../../services/doc.service/doc.filters.js'
@@ -11,6 +11,26 @@ const MyCases = (props) => {
 
     const [loading, setLoading] = useState(false)
     const [filter, setFilter] = useState('Без сортировки')
+
+    const [editingReport, setEditingReport] = useState(false)
+    const [editingLegal, setEditingLegal] = useState(false)
+
+    const [reportEdited, setReportEdited] = useState('')
+    const [legalEdited, setLegalEdited] = useState(false)
+    const [targetDoc, setTargetDoc] = useState('')
+
+    const editDocReport = () => {
+        setEditingReport(false)
+        docs[targetDoc].report = reportEdited
+        docApi.update(docs[targetDoc], props.token)
+    }
+
+    const editDocLegal = () => {
+        console.log(targetDoc)
+        setEditingLegal(false)
+        docs[targetDoc].legal = legalEdited
+        docApi.update(docs[targetDoc], props.token)
+    }
 
     const onFilterChange = (e) => {
         if (e.target.value === 'Без сортировки')
@@ -103,7 +123,7 @@ const MyCases = (props) => {
                                 </div>
                             </div>
                         ) : (
-                            <div style={{fontSize: "15px"}} className="border rounded-extra mt-4">
+                            <div style={{fontSize: "15px"}} className="mt-4">
                                 <Table
                                     striped
                                     responsive
@@ -142,6 +162,16 @@ const MyCases = (props) => {
                                                         ) : (
                                                             <span style={{color: "red"}}>
                                                                 Неизвестно<br />
+                                                                <Badge
+                                                                    onClick={() => {
+                                                                        setTargetDoc(index)
+                                                                        setEditingReport(true)
+                                                                    }} 
+                                                                    bg="primary" 
+                                                                    style={{cursor: "pointer"}}
+                                                                >
+                                                                    Изменить
+                                                                </Badge>
                                                             </span>
                                                         )}
                                                     </td>
@@ -151,6 +181,16 @@ const MyCases = (props) => {
                                                         ) : (
                                                             <span style={{color: "red"}}>
                                                                 Неизвестно<br />
+                                                                <Badge 
+                                                                    onClick={() => {
+                                                                        setTargetDoc(index)
+                                                                        setEditingLegal(true)
+                                                                    }} 
+                                                                    bg="primary" 
+                                                                    style={{cursor: "pointer"}}
+                                                                >
+                                                                    Изменить
+                                                                </Badge>
                                                             </span>
                                                         )}
                                                     </td>
@@ -164,6 +204,84 @@ const MyCases = (props) => {
                     </>
                 )}
             </div>
+
+            <Modal show={editingReport} onHide={() => setEditingReport(false)}>
+                                                <Modal.Header closeButton>
+                                                    <Modal.Title>Изменить</Modal.Title>
+                                                </Modal.Header>
+                                                <Modal.Body>
+                                                    <Form.Group>
+                                                        <FormLabel>Проделанная работа</FormLabel>
+                                                        <Form.Control onChange={(e) => {
+                                                                setReportEdited(e.target.value)
+                                                            }} 
+                                                            className="rounded-extra"
+                                                            as="textarea" 
+                                                            rows={3} 
+                                                            aria-label="With textarea" 
+                                                        />
+                                                    </Form.Group>
+                                                </Modal.Body>
+                                                <Modal.Footer>
+                                                    <Button 
+                                                        className="border rounded-extra"
+                                                        variant="secondary" 
+                                                        size="sm"
+                                                        onClick={() => setEditingReport(false)}
+                                                    >
+                                                        Отменить
+                                                    </Button>
+                                                    <Button
+                                                        className="border rounded-extra"
+                                                        variant="primary" 
+                                                        size="sm"
+                                                        onClick={() => editDocReport()}
+                                                    >
+                                                        Подтвердить
+                                                    </Button>
+                                                </Modal.Footer>
+                                            </Modal>
+
+                                            <Modal show={editingLegal} onHide={() => setEditingLegal(false)}>
+                                                <Modal.Header closeButton>
+                                                    <Modal.Title>Изменить</Modal.Title>
+                                                </Modal.Header>
+                                                <Modal.Body>
+                                                    <Form.Group>
+                                                        <FormLabel>Законность ЕРДР</FormLabel>
+                                                        <Form.Check 
+                                                            onChange={() => setLegalEdited(true)}
+                                                            type="switch"
+                                                            id="custom-switch"
+                                                            label="Подтверждаю законность ЕРДР"
+                                                        />
+                                                        <Form.Text className="text-muted">
+                                                            Этот параметр можно изменить только один раз.
+                                                        </Form.Text>
+                                                    </Form.Group>
+                                                </Modal.Body>
+                                                <Modal.Footer>
+                                                    <Button 
+                                                        className="border rounded-extra"
+                                                        variant="secondary"
+                                                        size="sm" 
+                                                        onClick={() => setEditingLegal(false)}
+                                                    >
+                                                        Отменить
+                                                    </Button>
+                                                    <Button 
+                                                        className="border rounded-extra"
+                                                        variant="primary" 
+                                                        size="sm"
+                                                        onClick={() => {
+                                                            if (legalEdited)
+                                                                editDocLegal()
+                                                        }}
+                                                    >
+                                                        Подтвердить
+                                                    </Button>
+                                                </Modal.Footer>
+                                            </Modal>
         </div>
     )
 }
