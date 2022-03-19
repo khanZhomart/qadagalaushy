@@ -39,7 +39,12 @@ const HomePage = (props) => {
           </Col>
           <Col sm md={12} lg={3}>
             <FadeIn>
-                <EmployeesPanel />
+                {props.role === 'Руководитель' ? (
+                  <EmployeesPanel />
+                ) : (
+                  <>
+                  </>
+                )}
             </FadeIn>
           </Col>
         </Row>
