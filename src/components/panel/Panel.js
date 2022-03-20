@@ -118,7 +118,8 @@ const Panel = (props) => {
                     />
                     <div className="mt-2">
                         <Form.Select
-                            className="d-inline rounded-extra w-25 bg-light" 
+                            style={{width: "150px"}}
+                            className="d-inline rounded-extra bg-light" 
                             size="sm"
                             disabled={loading}
                             onChange={onSearchChange}
@@ -129,6 +130,7 @@ const Panel = (props) => {
                             <option>Поиск по дате</option>
                         </Form.Select>
                         <Form.Select
+                            style={{width: "150px"}}
                             className="mx-2 d-inline rounded-extra w-20 bg-light" 
                             size="sm"
                             disabled={loading}

@@ -67,6 +67,7 @@ const MyCases = (props) => {
                 <Form.Group className="mb-3">
                     <div className="mt-2">
                         <Form.Select
+                            style={{width: "150px"}}
                             className="mx-2 d-inline rounded-extra w-20 bg-light" 
                             size="sm"
                             disabled={loading}

@@ -65,7 +65,6 @@ const EmployeesPanel = (props) => {
 
         try {
             const res = await userApi.getAll(props.token)
-            console.log(res.data)
             setEmployees(res.data)
         } catch (e) {
             if (e.response.status === 403)
