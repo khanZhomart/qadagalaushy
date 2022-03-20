@@ -27,13 +27,13 @@ const UserCard = ({ user, username, logout }) => {
                         pill 
                         bg="primary"
                     >
-                        Руководитель
+                        {user.role}
                     </Badge>{' '}
                     <Badge 
                         pill 
                         bg="primary"
                     >
-                        Прокуратура Есильского р.
+                        Прокуратура
                     </Badge>
                 </div>
             </div>
