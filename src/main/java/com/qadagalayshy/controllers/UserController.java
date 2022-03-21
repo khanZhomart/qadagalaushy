@@ -40,7 +40,6 @@ class UserController {
         );
     }
 
-    // TODO: implement this damn method~ :/
     @GetMapping("/role/{role}")
     public ResponseEntity<?> findAllByRole(@PathVariable String roleName) {
         return ResponseEntity.ok().body(

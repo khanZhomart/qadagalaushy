@@ -33,7 +33,7 @@ public class UserService implements Servable<User>, UserDetailsService {
     @Override
     public User save(User payload) {
         if (this.userRepository.existsByUsername(payload.getUsername()))
-            return null;
+            throw new IllegalArgumentException("Пользователь с таким никнеймом уже существует.");
 
         log.info(payload.toString());
 
@@ -67,7 +67,7 @@ public class UserService implements Servable<User>, UserDetailsService {
 
         return this.userRepository.save(user);
     }
-
+ 
     @Override
     public void remove(Long id) {
         this.userRepository.deleteById(id);

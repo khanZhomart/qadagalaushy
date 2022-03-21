@@ -25,7 +25,7 @@ public class DocService implements Servable<Doc> {
     @Override
     public Doc save(Doc payload) {
         if (this.docRepository.existsById(payload.getDocId()))
-            return null;
+            throw new IllegalArgumentException("Документ с таким идентификатором уже существует.");
 
         payload.setAssignmentDate(java.sql.Date.valueOf(LocalDate.now()));
 
