@@ -60,8 +60,12 @@ public class QadagalayshyApplication {
 				.roles(roles)
 				.build();
 
-			userService.save(user1);
-			userService.save(user2);
+			try {
+				userService.save(user1);
+				userService.save(user2);
+			} catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+			}
 		};
 	}
 }
