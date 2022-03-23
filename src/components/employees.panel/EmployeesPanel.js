@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, { useEffect, useState } from 'react'
 import { Badge, Form, ListGroup, Spinner, Button } from 'react-bootstrap'
 import * as Icon from 'react-bootstrap-icons'
@@ -12,7 +14,6 @@ const EmployeesPanel = (props) => {
 
     const [searchRequest, setSearchRequest] = useState('')
     const [loading, setLoading] = useState(false)
-    const [filter, setFilter] = useState('Без сортировки')
     const [search, setSearch] = useState('Все сотрудники')
 
     const [delayedRequestId, setDelayedRequestId] = useState(-1)

@@ -1,6 +1,5 @@
 import React from 'react'
-import * as Icon from 'react-bootstrap-icons'
-import { Container, Row, Col, Badge, Button } from 'react-bootstrap'
+import { Badge } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
 const UserCard = ({ user, username, logout }) => {

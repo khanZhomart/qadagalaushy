@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, { useEffect, useState } from 'react'
 import * as Icon from 'react-bootstrap-icons'
 import docApi from '../../api/doc.api.js'
