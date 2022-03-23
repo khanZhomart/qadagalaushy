@@ -61,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public CorsConfigurationSource corsConfigurationSource(String corsOrigin) {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(Arrays.asList(corsOrigin, "https://qadagalaushy.herokuapp.com"));
+        configuration.setAllowedOrigins(Arrays.asList(corsOrigin, "https://qadagalaushy.herokuapp.com", "http://qaqadagalaushy.herokuapp.com"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST","HEAD","OPTIONS","PUT","PATCH","DELETE"));
         configuration.setMaxAge(10L);
         configuration.setAllowCredentials(true);
