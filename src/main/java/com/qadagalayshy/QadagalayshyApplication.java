@@ -36,7 +36,7 @@ public class QadagalayshyApplication {
 			Role assistant = new Role(null, "Помощник");
 			Role developer = new Role(null, "Разработчик");
 
-			List<Role> roles = new ArrayList<>(Arrays.asList(admin, manager, assistant));
+			List<Role> roles = new ArrayList<>(Arrays.asList(admin, manager, assistant, developer));
 
 			roleRepository.saveAll(roles);
 
