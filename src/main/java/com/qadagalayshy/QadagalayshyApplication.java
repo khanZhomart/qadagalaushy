@@ -43,20 +43,21 @@ public class QadagalayshyApplication {
 			Role role = roleRepository.findById(3L).orElse(null);
 
 			User user1 = User.builder()
-				.username("zhoma")
+				.username("talgatuly")
 				.firstName("Жомартхан")
 				.lastName("Талғатұлы")
 				.password("12345")
-				.position("Прокурор Есильского района")
+				.position("Разработчик системы")
+				.prosecutor("Район Есиль")
 				.roles(new ArrayList<>(Arrays.asList(developer)))
 				.build();
 
 			User user2 = User.builder()
-				.username("nur89")
-				.firstName("Нұржан")
-				.lastName("Керімбаев")
-				.patronymic("Талғатұлы")
-				.prosecutor("Есильский район")
+				.username("baglan")
+				.firstName("Бағлан")
+				.lastName("Абдулахат")
+				.position("Заместитель прокурора")
+				.prosecutor("Район Сарыарка")
 				.password("12345")
 				.roles(roles)
 				.build();
