@@ -34,6 +34,7 @@ public class QadagalayshyApplication {
 			Role admin = new Role(null, "Руководитель");
 			Role manager = new Role(null, "Менеджер");
 			Role assistant = new Role(null, "Помощник");
+			Role developer = new Role(null, "Разработчик");
 
 			List<Role> roles = new ArrayList<>(Arrays.asList(admin, manager, assistant));
 
@@ -47,7 +48,7 @@ public class QadagalayshyApplication {
 				.lastName("Талғатұлы")
 				.password("12345")
 				.position("Прокурор Есильского района")
-				.roles(roles)
+				.roles(new ArrayList<>(Arrays.asList(developer)))
 				.build();
 
 			User user2 = User.builder()
