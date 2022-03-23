@@ -30,7 +30,7 @@ const HomePage = (props) => {
           </Col>
           <Col sm md={12} lg={7}>
             <FadeIn>
-              {props.role === 'Руководитель' || props.role === 'Менеджер' ? (
+              {props.role === 'Руководитель' || props.role === 'Менеджер' || props.role === 'Разработчик' ? (
                 <Panel />
               ) : (
                 <MyCases />
@@ -39,7 +39,7 @@ const HomePage = (props) => {
           </Col>
           <Col sm md={12} lg={3}>
             <FadeIn>
-                {props.role === 'Руководитель' ? (
+                {props.role === 'Руководитель' || props.role === 'Разработчик' ? (
                   <EmployeesPanel />
                 ) : (
                   <>
