@@ -90,7 +90,7 @@ const EmployeesPanel = (props) => {
     }, [])
 
     return (
-        <div>
+        <div style={{ paddingTop: "20px" }}>
             <p className="text-500 fs-5">Сотрудники</p>
             <div
                 className="border rounded-extra bg-white p-3"

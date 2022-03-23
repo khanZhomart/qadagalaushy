@@ -12,7 +12,7 @@ const UserCard = ({ user, username, logout }) => {
     }
     
     return (
-        <div>
+        <div style={{ paddingTop: "20px" }}>
             <p className="text-500 fs-5">Мой профиль</p>
             <div className="position-relative border rounded-extra bg-white p-3">
                 <p
@@ -21,18 +21,26 @@ const UserCard = ({ user, username, logout }) => {
                 >
                     {getUserFullname()}
                 </p>
-                <div className="">
+                <div
+                    className=""
+                 >
                     <Badge
                         pill 
                         bg="primary"
                     >
                         {user.role}
                     </Badge>{' '}
+                    <Badge
+                        pill 
+                        bg="primary"
+                    >
+                        {user.position}
+                    </Badge>{' '}
                     <Badge 
                         pill 
                         bg="primary"
                     >
-                        Прокуратура
+                        {user.prosecutor}
                     </Badge>
                 </div>
             </div>

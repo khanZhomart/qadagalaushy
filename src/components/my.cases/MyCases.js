@@ -161,6 +161,16 @@ const MyCases = (props) => {
                                                         {doc.report ? (
                                                             <>
                                                                 <span style={{whiteSpace: "pre-line"}}>{doc.report}</span><br />
+                                                                <Badge
+                                                                    onClick={() => {
+                                                                        setTargetDoc(index)
+                                                                        setEditingReport(true)
+                                                                    }} 
+                                                                    bg="primary" 
+                                                                    style={{cursor: "pointer"}}
+                                                                >
+                                                                    Изменить
+                                                                </Badge>
                                                             </>
                                                         ) : (
                                                             <span style={{color: "red"}}>

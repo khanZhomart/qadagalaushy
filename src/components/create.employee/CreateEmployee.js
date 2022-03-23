@@ -63,8 +63,10 @@ const CreateEmployee = (props) => {
             )
             setSuccess(true)
         } catch (e) {
-            console.log(e)
-            setError('Произошла ошибка!')
+            if (e.response?.status === 400)
+                return setError(`${e.response.data}`)
+
+            return setError('Произошла непредвиденная ошибка.')
         } finally {
             return setLoading(false)
         }

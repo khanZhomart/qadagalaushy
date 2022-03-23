@@ -7,6 +7,7 @@ import { Redirect } from 'react-router-dom'
 import NavigationBar from '../../components/nav/NavigationBar.js'
 import CreateCase from '../../components/create.case/CreateCase'
 import UserCard from '../../components/user.card/UserCard'
+import BackButton from '../../components/back-button/BackButton.js'
 
 const CreateCasePage = (props) => {
 
@@ -33,7 +34,18 @@ const CreateCasePage = (props) => {
             </Container> */}
             <div className="d-flex justify-content-center">
                 <FadeIn>
-                    <CreateCase />
+                    <div>
+                        <Container>
+                            <Row>
+                                <Col>
+                                    <BackButton link="/home" />
+                                </Col>
+                                <Col>
+                                    <CreateCase />
+                                </Col>
+                            </Row>
+                        </Container>
+                    </div>
                 </FadeIn>
             </div>
 

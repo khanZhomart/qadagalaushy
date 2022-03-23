@@ -105,7 +105,7 @@ const Panel = (props) => {
     }, [])
 
     return (
-        <div>
+        <div style={{ paddingTop: "20px" }}>
             <p className="text-500 fs-5">Журнал</p>
             <div className="border rounded-extra bg-white p-3">
                 <Form.Group className="mb-3">
@@ -166,10 +166,7 @@ const Panel = (props) => {
                                 onClick={() => loadDocs()}
                             >
                                 <div className="d-inline">
-                                    <Icon.BootstrapReboot
-                                        className=""
-                                        size="15" 
-                                    />
+                                    <span className="text-500 mx-1">Обновить</span>
                                 </div>
                             </Button>
                         </div>
@@ -237,14 +234,14 @@ const Panel = (props) => {
                                                 >
                                                     <td>
                                                         {doc.docId}<br /> 
-                                                        <Badge
+                                                        {/* <Badge
                                                             className="cursor-pointer"
                                                             pill
                                                             bg="danger"
                                                             onClick={() => onDeleteClick(index, doc.docId)}
                                                         >
                                                             <Icon.TrashFill />   
-                                                        </Badge>
+                                                        </Badge> */}
                                                     </td>
                                                     <td>{doc.responsibleEmployee.lastName + " " + doc.responsibleEmployee.firstName + " " + (doc.responsibleEmployee.patronymic ? doc.responsibleEmployee.patronymic : "")}</td>
                                                     <td>{doc.agency}</td>
