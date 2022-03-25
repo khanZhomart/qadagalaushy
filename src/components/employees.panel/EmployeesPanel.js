@@ -116,10 +116,12 @@ const EmployeesPanel = (props) => {
                             <option value="Все сотрудники">Все сотрудники</option>
                             <option>Поиск по никнейму</option>
                         </Form.Select>
+                    </div>
+                    <div className="mt-2">
                         <div className="d-inline">
                             <Link to="/employee/create">
                                 <Button
-                                    className="mx-2 rounded-extra box-success border"
+                                    className="rounded-extra box-success border"
                                     size="sm"
                                 >
                                     <div className="d-inline">

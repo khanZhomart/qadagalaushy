@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import * as Icon from 'react-bootstrap-icons'
 import docApi from '../../api/doc.api.js'
-import { Button, Form, Badge, Spinner, Table } from 'react-bootstrap'
+import { Button, Form, Badge, Spinner, Table, Container, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
 import filters from '../../services/doc.service/doc.filters.js'
@@ -119,56 +119,60 @@ const Panel = (props) => {
                         onChange={onSearchRequestChange}
                     />
                     <div className="mt-2">
-                        <Form.Select
-                            style={{width: "150px"}}
-                            className="d-inline rounded-extra bg-light" 
-                            size="sm"
-                            disabled={loading}
-                            onChange={onSearchChange}
-                        >
-                            <option value="Все документы">Все документы</option>
-                            <option>Поиск по номеру</option>
-                            <option>Поиск по сотруднику</option>
-                            <option>Поиск по дате</option>
-                        </Form.Select>
-                        <Form.Select
-                            style={{width: "150px"}}
-                            className="mx-2 d-inline rounded-extra w-20 bg-light" 
-                            size="sm"
-                            disabled={loading}
-                            onChange={onFilterChange}
-                        >
-                            <option value="Без сортировки">Без сортировки</option>
-                            <option>По номеру</option>
-                            <option>По дате</option>
-                            <option>По статусу</option>
-                        </Form.Select>
-                        <div className="d-inline">
-                            <Link to="/case/create">
+                        <div className="d-flex flew-row">
+                            <Form.Select
+                                style={{width: "150px"}}
+                                className="d-inline rounded-extra bg-light" 
+                                size="sm"
+                                disabled={loading}
+                                onChange={onSearchChange}
+                            >
+                                <option value="Все документы">Все документы</option>
+                                <option>Поиск по номеру</option>
+                                <option>Поиск по сотруднику</option>
+                                <option>Поиск по дате</option>
+                            </Form.Select>
+                            <Form.Select
+                                style={{width: "150px"}}
+                                className="mx-2 d-inline rounded-extra w-20 bg-light" 
+                                size="sm"
+                                disabled={loading}
+                                onChange={onFilterChange}
+                            >
+                                <option value="Без сортировки">Без сортировки</option>
+                                <option>По номеру</option>
+                                <option>По дате</option>
+                                <option>По статусу</option>
+                            </Form.Select>
+                        </div>
+                        <div className="mt-2">
+                            <div className="d-inline">
+                                <Link to="/case/create">
+                                    <Button
+                                        className="rounded-extra box-success border"
+                                        size="sm"
+                                    >
+                                        <div className="d-inline">
+                                            <Icon.FileEarmarkPlusFill
+                                                className="mb-1" 
+                                                size="15" 
+                                            />
+                                        </div>
+                                        <span className="text-500 mx-1">Новое</span>
+                                    </Button>
+                                </Link>
+                            </div>
+                            <div className="d-inline mx-2">
                                 <Button
                                     className="rounded-extra box-success border"
                                     size="sm"
+                                    onClick={() => loadDocs()}
                                 >
                                     <div className="d-inline">
-                                        <Icon.FileEarmarkPlusFill
-                                            className="mb-1" 
-                                            size="15" 
-                                        />
+                                        <span className="text-500 mx-1">Обновить</span>
                                     </div>
-                                    <span className="text-500 mx-1">Новое</span>
                                 </Button>
-                            </Link>
-                        </div>
-                        <div className="d-inline mx-2">
-                            <Button
-                                className="rounded-extra box-success border"
-                                size="sm"
-                                onClick={() => loadDocs()}
-                            >
-                                <div className="d-inline">
-                                    <span className="text-500 mx-1">Обновить</span>
-                                </div>
-                            </Button>
+                            </div>
                         </div>
                         <div className="mt-1">
                             <Badge 
