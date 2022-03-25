@@ -63,7 +63,7 @@ const MyCases = (props) => {
     }, [])
 
     return (
-        <div>
+        <div style={{ paddingTop: "20px" }}>
             <p className="text-500 fs-5">Мои дела</p>
             <div className="border rounded-extra bg-white p-3">
                 <Form.Group className="mb-3">
